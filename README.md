@@ -18,7 +18,8 @@ This repo stores the configuration files of my most used TUIs using GNU stow:
 - Run '$stow -D .' to unstow the file(s)
 - Move the file back(s) to their original location.
 
-### Links
+## Links
 
-The manual for GNU stow can be found [here](https://www.gnu.org/software/stow/manual/)
+The manual for GNU stow can be found [here](https://www.gnu.org/software/stow/manual/).
+
 A good tutorial can be found [here](https://youtu.be/06x3ZhwrrwA?si=4gCTKejHl8rzeBwX).
