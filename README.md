@@ -10,13 +10,15 @@ This repo stores the configuration files of my most used TUIs using GNU stow:
 
 ### Adding files to the repo
 
-- Move the file(s) to ~/.dotfiles with the same structure as in their original location.
-- Run '$ stow -t <_target directory_>'
+- Move the file(s) to ~/.dotfiles/<_stow directory_> with the same structure as in their original location.
+- Run `$ stow <_stow directory_>`
+- Update remote with git
 
 ### Removing files from the repo
 
-- Run '$stow -D .' to unstow the file(s)
+- Run `$stow -D <_stow directory_>` to unstow the file(s)
 - Move the file back(s) to their original location.
+- Update remote with git
 
 ## Links
 

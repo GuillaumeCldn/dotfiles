@@ -114,6 +114,9 @@ export NVIM_LOG_LEVEL=debug
 #———ATUIN———
 eval "$(atuin init zsh)"
 
+#———BOB NVIM MANAGER———
+export PATH="$HOME/.local/share/bob/nvim-bin:$PATH"
+
 # >>> Added by Spyder >>>
 alias uninstall-spyder=/Users/guiguiclaudon/Library/spyder-6/uninstall-spyder.sh
 # <<< Added by Spyder <<<
