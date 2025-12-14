@@ -1,5 +1,9 @@
 {
   "plugins": {
+    "kerbovim": {
+      "rev": "98612cc39edf7b35c9bcdeeceb25981ef887773b",
+      "src": "https://github.com/Freedzone/kerbovim"
+    },
     "mason-lspconfig.nvim": {
       "rev": "c55bd8a8fb191e24176c206a7af1dd51ce7276a5",
       "src": "https://github.com/mason-org/mason-lspconfig.nvim"
