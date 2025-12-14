@@ -6,6 +6,7 @@ vim.opt.shiftwidth = 4
 vim.opt.signcolumn = "yes"
 vim.opt.swapfile = false
 vim.opt.winborder = "rounded"
+vim.opt.termguicolors = true
 
 -- Keymaps --
 vim.g.mapleader = " "
@@ -24,6 +25,7 @@ vim.pack.add({
 	{ src = "https://github.com/neovim/nvim-lspconfig" },
 	{ src = "https://github.com/mason-org/mason.nvim" },
 	{ src = "https://github.com/mason-org/mason-lspconfig.nvim" },
+	{ src = "https://github.com/nvim-treesitter/nvim-treesitter" },
 	{ src = "https://github.com/xiyaowong/transparent.nvim" },
 	{ src = "https://github.com/folke/todo-comments.nvim" },
 })
