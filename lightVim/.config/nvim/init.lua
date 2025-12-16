@@ -53,11 +53,10 @@ vim.keymap.set("n", "<leader>e", ":Explore<CR>", { desc = "Open file explorer" }
 vim.keymap.set("n", "<leader>ff", ":find ", { desc = "Find file" })
 
 -- Better J behavior
- vim.keymap.set("n", "J", "mzJ`z", { desc = "Join lines and keep cursor position" })
+vim.keymap.set("n", "J", "mzJ`z", { desc = "Join lines and keep cursor position" })
 
 -- Quick config editing
 vim.keymap.set("n", "<leader>rc", ":e $MYVIMRC<CR>", { desc = "Edit config" })
-
 
 -- Copy Full File-Path
 vim.keymap.set("n", "<leader>pa", function()
@@ -71,18 +70,17 @@ local augroup = vim.api.nvim_create_augroup("UserConfig", {})
 
 -- Highlight yanked text
 vim.api.nvim_create_autocmd("TextYankPost", {
-  group = augroup,
-  callback = function()
-    vim.highlight.on_yank()
-  end,
+	group = augroup,
+	callback = function()
+		vim.highlight.on_yank()
+	end,
 })
-
-
 
 -- TODO: Lualine config
 -- Package installation
 vim.pack.add({
 	{ src = "https://github.com/catppuccin/nvim" },
+	{ src = "https://github.com/rebelot/kanagawa.nvim" },
 	{ src = "https://github.com/chomosuke/typst-preview.nvim" },
 	{ src = "https://github.com/nvim-mini/mini.pick" },
 	{ src = "https://github.com/nvim-mini/mini.icons" },
@@ -107,13 +105,25 @@ require("mason").setup({
 })
 require("mason-lspconfig").setup()
 require("todo-comments").setup()
+require("kanagawa").setup({
+	colors = {
+		theme = {
+			all = {
+				ui = {
+					bg_gutter = "none"
+					}
+				}
+			}
+		}
+	}
+)
 
 -- TODO: Python code highlighting is still limited --
 -- Language servers --
 vim.lsp.config("lua_ls", { settings = { Lua = { workspace = { library = vim.api.nvim_get_runtime_file("", true) } } } })
 
 -- Colorscheme & background --
-vim.cmd.colorscheme("catppuccin-macchiato")
+vim.cmd.colorscheme("kanagawa")
 vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
 vim.api.nvim_set_hl(0, "NormalNC", { bg = "none" })
 vim.api.nvim_set_hl(0, "EndOfBuffer", { bg = "none" })
