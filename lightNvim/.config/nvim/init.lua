@@ -1,22 +1,22 @@
--- General --
+-- General
 vim.opt.number = true
 vim.opt.relativenumber = true
 vim.opt.cursorline = true
 vim.opt.swapfile = false
 vim.opt.wrap = false
 
--- Indentation --
+-- Indentation
 vim.opt.tabstop = 4
 vim.opt.shiftwidth = 4
 vim.opt.softtabstop = 4
 vim.opt.smartindent = true
 vim.opt.autoindent = true
 
--- Search settings --
+-- Search settings
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
 
--- Visual settings --
+-- Visual settings
 vim.opt.winborder = "rounded"
 vim.opt.termguicolors = true
 vim.opt.signcolumn = "yes"
@@ -25,7 +25,7 @@ vim.opt.pumblend = 10
 vim.opt.pumheight = 10
 vim.opt.completeopt = "noinsert,noselect"
 
--- Keymaps-
+-- Keymaps
 vim.g.mapleader = " "
 vim.keymap.set("n", "<leader>so", ":update<CR> :source<CR>")
 vim.keymap.set("n", "<leader>lf", vim.lsp.buf.format)
