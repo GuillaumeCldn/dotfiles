@@ -5,6 +5,7 @@ This repo stores the configuration files of my most used TUIs using GNU stow:
 - ZShell
 - Tmux
 - Neovim
+- Vim
 
 ## Instructions
 
