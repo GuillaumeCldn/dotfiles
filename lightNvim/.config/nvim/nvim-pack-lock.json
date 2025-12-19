@@ -44,6 +44,10 @@
       "rev": "d3218d988f72ed34414959c9ccd802d393432d6e",
       "src": "https://github.com/nvim-treesitter/nvim-treesitter"
     },
+    "tiny-inline-diagnostic.nvim": {
+      "rev": "d9d12d4bfb9a4c5b8b8bdf7f612551df6972946c",
+      "src": "https://github.com/rachartier/tiny-inline-diagnostic.nvim"
+    },
     "todo-comments.nvim": {
       "rev": "31e3c38ce9b29781e4422fc0322eb0a21f4e8668",
       "src": "https://github.com/folke/todo-comments.nvim"

@@ -58,6 +58,10 @@ vim.keymap.set("n", "J", "mzJ`z", { desc = "Join lines and keep cursor position"
 -- Quick config editing
 vim.keymap.set("n", "<leader>rc", ":e $MYVIMRC<CR>", { desc = "Edit config" })
 
+-- Typst Preview
+vim.keymap.set("n", "<leader>Tp", ":TypstPreview<CR>", { desc = "Open Typst preview" })
+vim.keymap.set("n", "<leader>Tp", ":TypstPreviewStop<CR>", { desc = "Close Typst preview" })
+
 -- Copy Full File-Path
 vim.keymap.set("n", "<leader>pa", function()
 	local path = vim.fn.expand("%:p")
@@ -92,6 +96,7 @@ vim.pack.add({
 	{ src = "https://github.com/folke/todo-comments.nvim" },
 	{ src = "https://github.com/nvim-lualine/lualine.nvim" },
 	{ src = "https://github.com/lewis6991/gitsigns.nvim" },
+	{ src = "https://github.com/rachartier/tiny-inline-diagnostic.nvim" },
 })
 
 -- Package activation --
@@ -107,8 +112,9 @@ require("mason").setup({
 })
 require("mason-lspconfig").setup()
 require("todo-comments").setup()
-require("lualine").setup()
+require("lualine").setup({ sections = { lualine_y = { "lsp_status" } } })
 require("gitsigns").setup()
+require("tiny-inline-diagnostic")
 
 -- FIX: Python code highlighting is still limited
 
