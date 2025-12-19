@@ -76,11 +76,19 @@ export PATH="$HOME/.pyenv/bin:$PATH"
 eval "$(pyenv init --path)"
 eval "$(pyenv init -)"
 
-# ———BAT———
+#———BAT———
 export BAT_THEME="Catppuccin Mocha"
 
-#———EZA———
-alias eza="eza --color=always --long --git --no-filesize --icons=always --no-time --no-user --no-permissions"
+#———GIT———
+alias gc="git commit -m"
+alias gca="git commit -a -m"
+alias gst="git status"
+alias gdiff="git diff"
+alias gco="git checkout"
+alias gb='git branch'
+alias gba='git branch -a'
+alias gadd='git add'
+alias glog="git log --graph --topo-order --pretty='%w(100,0,6)%C(yellow)%h%C(bold)%C(black)%d %C(cyan)%ar %C(green)%an%n%C(bold)%C(white)%s %N' --abbrev-commit"
 
 #———THEFUCK———
 eval $(thefuck --alias fk)
