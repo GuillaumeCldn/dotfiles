@@ -1,7 +1,7 @@
 -- General
 vim.opt.number = true
 vim.opt.relativenumber = true
-vim.opt.cursorline = true
+vim.opt.cursorline = false
 vim.opt.swapfile = false
 vim.opt.wrap = false
 
@@ -118,17 +118,15 @@ require("tiny-inline-diagnostic")
 
 -- FIX: Python code highlighting is still limited
 
--- Language servers --
+-- Language servers
 vim.lsp.config("lua_ls", { settings = { Lua = { workspace = { library = vim.api.nvim_get_runtime_file("", true) } } } })
 
--- Colorscheme & background --
+-- Colorscheme & background
 vim.cmd.colorscheme("catppuccin-macchiato")
 vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
 vim.api.nvim_set_hl(0, "NormalNC", { bg = "none" })
 vim.api.nvim_set_hl(0, "EndOfBuffer", { bg = "none" })
 
--- Status line --
-vim.cmd(":hi statusline guibg=NONE")
 
 -- ============================================================================
 -- TABS
