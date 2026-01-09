@@ -3,7 +3,7 @@ vim.opt.number = true
 vim.opt.relativenumber = true
 vim.opt.cursorline = false
 vim.opt.swapfile = false
-vim.opt.wrap = false
+vim.opt.wrap = true
 
 -- Indentation
 vim.opt.tabstop = 4
@@ -97,6 +97,8 @@ vim.pack.add({
 	{ src = "https://github.com/nvim-lualine/lualine.nvim" },
 	{ src = "https://github.com/lewis6991/gitsigns.nvim" },
 	{ src = "https://github.com/rachartier/tiny-inline-diagnostic.nvim" },
+	{ src = "https://github.com/lervag/vimtex" },
+	{ src = "https://github.com/amitds1997/remote-nvim.nvim" },
 })
 
 -- Package activation --
@@ -115,6 +117,8 @@ require("todo-comments").setup()
 require("lualine").setup({ sections = { lualine_y = { "lsp_status" } } })
 require("gitsigns").setup()
 require("tiny-inline-diagnostic")
+vim.g.vimtex_view_method = "skim"
+vim.g.vimtex_compiler_progname = "nvr"
 
 -- FIX: Python code highlighting is still limited
 
@@ -126,7 +130,6 @@ vim.cmd.colorscheme("catppuccin-macchiato")
 vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
 vim.api.nvim_set_hl(0, "NormalNC", { bg = "none" })
 vim.api.nvim_set_hl(0, "EndOfBuffer", { bg = "none" })
-
 
 -- ============================================================================
 -- TABS
