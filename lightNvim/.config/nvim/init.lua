@@ -80,6 +80,19 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 	end,
 })
 
+vim.api.nvim_create_autocmd('LspAttach', {
+	callback = function(ev)
+		local client = vim.lsp.get_client_by_id(ev.data.client_id)
+		if client:supports_method('textDocument/completion') then
+			vim.opt.completeopt = { 'menu', 'menuone', 'noinsert', 'fuzzy', 'popup' }
+			vim.lsp.completion.enable(true, client.id, ev.buf, { autotrigger = true })
+			vim.keymap.set('i', '<C-Space>', function()
+				vim.lsp.completion.get()
+			end)
+		end
+	end,
+})
+
 -- TODO: Lualine config
 
 -- Package installation
@@ -88,42 +101,26 @@ vim.pack.add({
 	{ src = "https://github.com/chomosuke/typst-preview.nvim" },
 	{ src = "https://github.com/nvim-mini/mini.pick" },
 	{ src = "https://github.com/nvim-mini/mini.icons" },
-	{ src = "https://github.com/neovim/nvim-lspconfig" },
-	{ src = "https://github.com/mason-org/mason.nvim" },
-	{ src = "https://github.com/mason-org/mason-lspconfig.nvim" },
-	{ src = "https://github.com/nvim-treesitter/nvim-treesitter" },
 	{ src = "https://github.com/Freedzone/kerbovim" },
 	{ src = "https://github.com/folke/todo-comments.nvim" },
 	{ src = "https://github.com/nvim-lualine/lualine.nvim" },
 	{ src = "https://github.com/lewis6991/gitsigns.nvim" },
-	{ src = "https://github.com/rachartier/tiny-inline-diagnostic.nvim" },
 	{ src = "https://github.com/lervag/vimtex" },
-	{ src = "https://github.com/amitds1997/remote-nvim.nvim" },
 })
 
 -- Package activation --
 require("mini.pick").setup()
-require("mason").setup({
-	ui = {
-		icons = {
-			package_installed = "✓",
-			package_pending = "➜",
-			package_uninstalled = "✗",
-		},
-	},
-})
-require("mason-lspconfig").setup()
 require("todo-comments").setup()
 require("lualine").setup({ sections = { lualine_y = { "lsp_status" } } })
 require("gitsigns").setup()
-require("tiny-inline-diagnostic")
 vim.g.vimtex_view_method = "skim"
 vim.g.vimtex_compiler_progname = "nvr"
 
--- FIX: Python code highlighting is still limited
-
 -- Language servers
-vim.lsp.config("lua_ls", { settings = { Lua = { workspace = { library = vim.api.nvim_get_runtime_file("", true) } } } })
+vim.lsp.enable({'clangd', 'lua_ls', 'basedpyright', 'texlab', 'bashls', 'tinymist'})
+
+-- Diagnostics
+vim.diagnostic.config({ virtual_text = true })
 
 -- Colorscheme & background
 vim.cmd.colorscheme("catppuccin-macchiato")
