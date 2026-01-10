@@ -96,6 +96,9 @@ eval $(thefuck --alias fk)
 #———ZOXIDE——— 
 eval "$(zoxide init zsh)"
 
+#———EZA———
+alias eza="eza -1 --icons=auto"
+
 
 #———BETTER HISTORY MANAGEMENT———
 HISTFILE=$HOME/.zhistory
