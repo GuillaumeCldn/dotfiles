@@ -135,7 +135,11 @@ vim.g.vimtex_compiler_progname = "nvr"
 vim.lsp.enable({'clangd', 'lua_ls', 'basedpyright', 'texlab', 'bashls', 'tinymist'})
 
 -- Diagnostics
-vim.diagnostic.config({ virtual_text = true })
+vim.diagnostic.config({
+	virtual_lines = {
+		current_line = true,
+	},
+})
 
 -- Colorscheme & background
 vim.cmd.colorscheme("catppuccin-macchiato")

@@ -25,6 +25,7 @@ Session.vim
 *~
 *.bak
 *.tmp
+nvim-pack-lock.json
 
 # -- Sensitive Information (CRITICAL) --
 # Never commit private keys or history
