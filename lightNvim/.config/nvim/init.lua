@@ -1,7 +1,8 @@
 -- General
 vim.opt.number = true
 vim.opt.relativenumber = true
-vim.opt.cursorline = false
+vim.opt.cursorline = true        -- This must still be enabled
+vim.opt.cursorlineopt = 'number' -- Restricts highlighting to the number column only
 vim.opt.swapfile = false
 vim.opt.wrap = true
 
@@ -93,7 +94,6 @@ vim.api.nvim_create_autocmd('LspAttach', {
 	end,
 })
 
--- TODO: Lualine config
 
 -- Package installation
 vim.pack.add({
@@ -109,7 +109,7 @@ vim.pack.add({
 	{ src = "https://github.com/nvim-treesitter/nvim-treesitter" },
 })
 
--- Package activation --
+-- Package activation
 require("mini.pick").setup()
 require("todo-comments").setup()
 require("lualine").setup({ sections = { lualine_y = { "lsp_status" } } })
