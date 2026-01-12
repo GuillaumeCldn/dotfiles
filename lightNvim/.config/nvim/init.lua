@@ -106,6 +106,7 @@ vim.pack.add({
 	{ src = "https://github.com/nvim-lualine/lualine.nvim" },
 	{ src = "https://github.com/lewis6991/gitsigns.nvim" },
 	{ src = "https://github.com/lervag/vimtex" },
+	{ src = "https://github.com/nvim-treesitter/nvim-treesitter" },
 })
 
 -- Package activation --
@@ -113,6 +114,20 @@ require("mini.pick").setup()
 require("todo-comments").setup()
 require("lualine").setup({ sections = { lualine_y = { "lsp_status" } } })
 require("gitsigns").setup()
+require("nvim-treesitter").setup({
+	build = ':TSUpdate',
+	ensure_installed = {
+		'lua'
+	},
+	auto_install = false,
+	highlight = {
+		enable = true,
+		additional_vim_regex_highlighting = false,
+	},
+	indent = {
+		enable = true,
+	},
+})
 vim.g.vimtex_view_method = "skim"
 vim.g.vimtex_compiler_progname = "nvr"
 
