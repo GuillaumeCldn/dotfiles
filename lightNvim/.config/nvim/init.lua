@@ -56,12 +56,22 @@ vim.keymap.set("n", "<leader>ff", ":find ", { desc = "Find file" })
 -- Better J behavior
 vim.keymap.set("n", "J", "mzJ`z", { desc = "Join lines and keep cursor position" })
 
+-- MacOs style word deletion
+vim.keymap.set("i", "<A-BS>", "<C-W>", { desc = "Delete previous word" })
+-- vim.keymap.set("i", "<D-BS>", "<C-U>", { desc = "Delete to start of line" })
+
+-- MacOs style word navigation
+vim.keymap.set("i", "<A-Left>", "<C-Left>", { desc = "Move to previous word" })
+vim.keymap.set("i", "<A-Right>", "<C-Right>", { desc = "Move to next word" })
+-- vim.keymap.set("i", "<D-Left>", "<Home>", { desc = "Move to start of line" })
+-- vim.keymap.set("i", "<D-Right>", "<End>", { desc = "Move to end of line" })
+
 -- Quick config editing
 vim.keymap.set("n", "<leader>rc", ":e $MYVIMRC<CR>", { desc = "Edit config" })
 
 -- Typst Preview
 vim.keymap.set("n", "<leader>Tp", ":TypstPreview<CR>", { desc = "Open Typst preview" })
-vim.keymap.set("n", "<leader>Tp", ":TypstPreviewStop<CR>", { desc = "Close Typst preview" })
+vim.keymap.set("n", "<leader>Ts", ":TypstPreviewStop<CR>", { desc = "Close Typst preview" })
 
 -- Copy Full File-Path
 vim.keymap.set("n", "<leader>pa", function()
