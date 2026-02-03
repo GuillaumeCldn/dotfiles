@@ -56,6 +56,8 @@ vim.keymap.set("n", "<leader>ff", ":find ", { desc = "Find file" })
 -- Better J behavior
 vim.keymap.set("n", "J", "mzJ`z", { desc = "Join lines and keep cursor position" })
 
+-- FIXME: Add Command-Delete/Left/Right keybinds
+
 -- MacOs style word deletion
 vim.keymap.set("i", "<A-BS>", "<C-W>", { desc = "Delete previous word" })
 -- vim.keymap.set("i", "<D-BS>", "<C-U>", { desc = "Delete to start of line" })
@@ -171,13 +173,13 @@ vim.cmd([[
 ]])
 
 -- Alternative navigation (more intuitive)
-vim.keymap.set("n", "<leader>tn", ":tabnew<CR>", { desc = "New tab" })
-vim.keymap.set("n", "<leader>tx", ":tabclose<CR>", { desc = "Close tab" })
+vim.keymap.set("n", "<leader>TN", ":tabnew<CR>", { desc = "New tab" })
+vim.keymap.set("n", "<leader>TX", ":tabclose<CR>", { desc = "Close tab" })
 
 -- Tab moving
-vim.keymap.set("n", "<leader>tm", ":tabmove<CR>", { desc = "Move tab" })
-vim.keymap.set("n", "<leader>t>", ":tabmove +1<CR>", { desc = "Move tab right" })
-vim.keymap.set("n", "<leader>t<", ":tabmove -1<CR>", { desc = "Move tab left" })
+vim.keymap.set("n", "<leader>TM", ":tabmove<CR>", { desc = "Move tab" })
+vim.keymap.set("n", "<leader>T>", ":tabmove +1<CR>", { desc = "Move tab right" })
+vim.keymap.set("n", "<leader>T<", ":tabmove -1<CR>", { desc = "Move tab left" })
 
 -- Function to open file in new tab
 local function open_file_in_tab()
@@ -218,10 +220,10 @@ local function close_tabs_left()
 end
 
 -- Enhanced keybindings
-vim.keymap.set("n", "<leader>tO", open_file_in_tab, { desc = "Open file in new tab" })
-vim.keymap.set("n", "<leader>td", duplicate_tab, { desc = "Duplicate current tab" })
-vim.keymap.set("n", "<leader>tr", close_tabs_right, { desc = "Close tabs to the right" })
-vim.keymap.set("n", "<leader>tL", close_tabs_left, { desc = "Close tabs to the left" })
+vim.keymap.set("n", "<leader>TO", open_file_in_tab, { desc = "Open file in new tab" })
+vim.keymap.set("n", "<leader>TD", duplicate_tab, { desc = "Duplicate current tab" })
+vim.keymap.set("n", "<leader>TR", close_tabs_right, { desc = "Close tabs to the right" })
+vim.keymap.set("n", "<leader>TL", close_tabs_left, { desc = "Close tabs to the left" })
 
 -- Function to close buffer but keep tab if it's the only buffer in tab
 local function smart_close_buffer()
