@@ -65,12 +65,15 @@ vim.keymap.set("i", "<A-BS>", "<C-W>", { desc = "Delete previous word" })
 vim.keymap.set("i", "<A-Left>", "<C-Left>", { desc = "Move to previous word" })
 vim.keymap.set("i", "<A-Right>", "<C-Right>", { desc = "Move to next word" })
 
+-- MacOs double-space for full stop. 
+vim.keymap.set("i", "<space><space>", ". ", { desc = "MacOs style full stop" })
+
 -- Quick config editing
 vim.keymap.set("n", "<leader>rc", ":e $MYVIMRC<CR>", { desc = "Edit config" })
 
 -- Typst Preview
-vim.keymap.set("n", "<leader>Tp", ":TypstPreview<CR>", { desc = "Open Typst preview" })
-vim.keymap.set("n", "<leader>Ts", ":TypstPreviewStop<CR>", { desc = "Close Typst preview" })
+vim.keymap.set("n", "<leader>TP", ":TypstPreview<CR>", { desc = "Open Typst preview" })
+vim.keymap.set("n", "<leader>TS", ":TypstPreviewStop<CR>", { desc = "Close Typst preview" })
 
 -- Copy Full File-Path
 vim.keymap.set("n", "<leader>pa", function()
@@ -141,7 +144,7 @@ vim.g.vimtex_view_method = "skim"
 vim.g.vimtex_compiler_progname = "nvr"
 
 -- Language servers
-vim.lsp.enable({'clangd', 'lua_ls', 'basedpyright', 'texlab', 'bashls', 'tinymist'})
+vim.lsp.enable({ 'clangd', 'lua_ls', 'basedpyright', 'texlab', 'bashls', 'tinymist' })
 
 -- Diagnostics
 vim.diagnostic.config({
@@ -162,7 +165,7 @@ vim.api.nvim_set_hl(0, "EndOfBuffer", { bg = "none" })
 
 -- Tab display settings
 vim.opt.showtabline = 1 -- Always show tabline (0=never, 1=when multiple tabs, 2=always)
-vim.opt.tabline = "" -- Use default tabline (empty string uses built-in)
+vim.opt.tabline = ""    -- Use default tabline (empty string uses built-in)
 
 -- Transparent tabline appearance
 vim.cmd([[
