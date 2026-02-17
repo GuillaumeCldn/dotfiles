@@ -65,7 +65,7 @@ vim.keymap.set("i", "<A-BS>", "<C-W>", { desc = "Delete previous word" })
 vim.keymap.set("i", "<A-Left>", "<C-Left>", { desc = "Move to previous word" })
 vim.keymap.set("i", "<A-Right>", "<C-Right>", { desc = "Move to next word" })
 
--- MacOs double-space for full stop. 
+-- MacOs double-space for full stop.
 vim.keymap.set("i", "<space><space>", ". ", { desc = "MacOs style full stop" })
 
 -- Quick config editing
@@ -119,6 +119,7 @@ vim.pack.add({
 	{ src = "https://github.com/lewis6991/gitsigns.nvim" },
 	{ src = "https://github.com/lervag/vimtex" },
 	{ src = "https://github.com/nvim-treesitter/nvim-treesitter" },
+	{ src = "https://github.com/L3MON4D3/LuaSnip" },
 })
 
 -- Package activation
@@ -126,6 +127,13 @@ require("mini.pick").setup()
 require("todo-comments").setup()
 require("lualine").setup({ sections = { lualine_y = { "lsp_status" } } })
 require("gitsigns").setup()
+local ls = require("luasnip")
+ls.config.set_config {
+	history = true,
+	updateevents = "TextChanged,TextChangedI",
+	enable_autosnippets = true,
+}
+require("luasnip.loaders.from_lua").load({paths = "~/.config/nvim/snippets/"})
 require("nvim-treesitter").setup({
 	build = ':TSUpdate',
 	ensure_installed = {
@@ -152,6 +160,18 @@ vim.diagnostic.config({
 		current_line = true,
 	},
 })
+
+-- Luasnip keymaps
+vim.keymap.set({ "i" }, "<C-K>", function() ls.expand() end, { silent = true })
+vim.keymap.set({ "i", "s" }, "<C-L>", function() ls.jump(1) end, { silent = true })
+vim.keymap.set({ "i", "s" }, "<C-J>", function() ls.jump(-1) end, { silent = true })
+
+vim.keymap.set({ "i", "s" }, "<C-E>", function()
+	if ls.choice_active() then
+		ls.change_choice(1)
+	end
+end, { silent = true })
+vim.keymap.set({ "i" }, "<leader><leader>so", "<cmd>source ~/.config/nvim/snippets.lua")
 
 -- Colorscheme & background
 vim.cmd.colorscheme("catppuccin-macchiato")
