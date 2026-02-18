@@ -142,6 +142,7 @@ require("nvim-treesitter").setup({
 	auto_install = false,
 	highlight = {
 		enable = true,
+		disable = { "latex" },
 		additional_vim_regex_highlighting = false,
 	},
 	indent = {
@@ -150,6 +151,8 @@ require("nvim-treesitter").setup({
 })
 vim.g.vimtex_view_method = "skim"
 vim.g.vimtex_compiler_progname = "nvr"
+vim.opt.conceallevel = 1
+vim.g.tex_conceal = "abdmg"
 
 -- Language servers
 vim.lsp.enable({ 'clangd', 'lua_ls', 'basedpyright', 'texlab', 'bashls', 'tinymist' })
