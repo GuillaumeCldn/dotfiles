@@ -128,10 +128,23 @@ require("todo-comments").setup()
 require("lualine").setup({ sections = { lualine_y = { "lsp_status" } } })
 require("gitsigns").setup()
 local ls = require("luasnip")
+local types = require("luasnip.util.types")
 ls.config.set_config {
+	keep_roots = true,
+	link_roots = true,
+	link_children = true,
 	history = true,
 	updateevents = "TextChanged,TextChangedI",
+	delete_check_events = "TextChanged",
 	enable_autosnippets = true,
+	store_selection_keys = "<Tab>",
+	ext_opts = {
+		[types.choiceNode] = {
+			active = {
+				virt_text = { { "choiceNode", "Comment" } },
+			},
+		},
+	},
 }
 require("luasnip.loaders.from_lua").lazy_load({paths = "~/.config/nvim/snippets/"})
 require("nvim-treesitter").setup({
