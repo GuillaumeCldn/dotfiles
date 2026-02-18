@@ -133,7 +133,7 @@ ls.config.set_config {
 	updateevents = "TextChanged,TextChangedI",
 	enable_autosnippets = true,
 }
-require("luasnip.loaders.from_lua").load({paths = "~/.config/nvim/snippets/"})
+require("luasnip.loaders.from_lua").lazy_load({paths = "~/.config/nvim/snippets/"})
 require("nvim-treesitter").setup({
 	build = ':TSUpdate',
 	ensure_installed = {
