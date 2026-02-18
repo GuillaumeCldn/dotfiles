@@ -1,4 +1,4 @@
-local helpers = require('luasnip-helper-funcs')
+local helpers = require("luasnip-helper-funcs")
 local date_input = helpers.date_input
 
 return {
