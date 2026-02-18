@@ -6,12 +6,18 @@ local in_equation = tex_utils.in_equation
 return {
 	s(
 		{
-			trig = "test",
-			snippetType = "autosnippet",
-			condition = in_mathzone
+		trig = "frac",
+		snippetType = "autosnippet",
+		condition = in_mathzone,
 		},
+		fmta(
+		[[
+\frac{<>}{<>}	
+		]],
 		{
-			t("\\text{test}")
+			i(1),
+			i(2)
 		}
-	),
+		)
+	)
 }
