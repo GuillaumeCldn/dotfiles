@@ -162,10 +162,15 @@ vim.diagnostic.config({
 })
 
 -- Luasnip keymaps
-vim.keymap.set({ "i" }, "<C-K>", function() ls.expand() end, { silent = true })
-vim.keymap.set({ "i", "s" }, "<C-L>", function() ls.jump(1) end, { silent = true })
-vim.keymap.set({ "i", "s" }, "<C-J>", function() ls.jump(-1) end, { silent = true })
-
+vim.cmd[[
+   " Vimscript goes here!" Expand or jump in insert mode
+	imap <silent><expr> <Tab> luasnip#expand_or_jumpable() ? '<Plug>luasnip-expand-or-jump' : '<Tab>' 
+	" Jump forward through tabstops in visual mode
+	smap <silent><expr> <Tab> luasnip#jumpable(1) ? '<Plug>luasnip-jump
+	" Jump backward through snippet tabstops with Shift-Tab (for example)
+	imap <silent><expr> <S-Tab> luasnip#jumpable(-1) ? '<Plug>luasnip-jump-prev' : '<S-Tab>'
+	smap <silent><expr> <S-Tab> luasnip#jumpable(-1) ? '<Plug>luasnip-jump-prev' : '<S-Tab>'-next' : '<Tab>'
+]]
 vim.keymap.set({ "i", "s" }, "<C-E>", function()
 	if ls.choice_active() then
 		ls.change_choice(1)
