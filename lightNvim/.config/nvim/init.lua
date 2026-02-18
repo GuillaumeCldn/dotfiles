@@ -187,7 +187,7 @@ vim.cmd[[
 	" Jump backward through snippet tabstops with Shift-Tab (for example)
 	imap <silent><expr> <S-Tab> luasnip#jumpable(-1) ? '<Plug>luasnip-jump-prev' : '<S-Tab>'
 	smap <silent><expr> <S-Tab> luasnip#jumpable(-1) ? '<Plug>luasnip-jump-prev' : '<S-Tab>'-next' : '<Tab>'
-]]vim.keymap.set('n', '<Leader>L', '<Cmd>lua require("luasnip.loaders.from_lua").load({paths = "~/.config/nvim/LuaSnip/"})<CR>')
+]]
 vim.keymap.set({ "i", "s" }, "<C-E>", function()
 	if ls.choice_active() then
 		ls.change_choice(1)
