@@ -194,6 +194,13 @@ vim.keymap.set({ "i", "s" }, "<C-E>", function()
 end, { silent = true })
 vim.keymap.set({ "i" }, "<leader><leader>so", "<cmd>source ~/.config/nvim/snippets.lua")
 
+
+-- Spellcheck configuration
+vim.g.spellfile_URL = "https://www.mirrorservice.org/sites/ftp.vim.org/pub/vim/runtime/spell/"
+vim.opt.spelllang = {'en_gb', 'fr', 'de'}
+vim.opt.spell = true
+vim.keymap.set('i', '<C-l>', '<c-g>u<Esc>[s1z=`]a<c-g>u', { desc = "Correct last misspelled word" })
+
 -- Colorscheme & background
 vim.cmd.colorscheme("catppuccin-macchiato")
 vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
