@@ -7,7 +7,7 @@ return{
 			{
 			trig = "<>",
 			snippetType = "<>",
-			condition = "<>",
+			condition = <>,
 			},
 			{
 				<>
