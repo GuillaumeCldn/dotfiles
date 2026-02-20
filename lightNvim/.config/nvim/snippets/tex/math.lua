@@ -38,6 +38,27 @@ local function gen_matrix(_, snip)
 	return sn(nil, nodes)
 end
 
+local function gen_vector(_, snip)
+	local cols = tonumber(snip.captures[1])
+	local nodes = {}
+	local insert_index = 1
+
+	for col = 1, cols do
+
+		table.insert(nodes, i(insert_index))
+		insert_index = insert_index + 1
+
+		if col < cols then
+			table.insert(nodes, t({ " \\\\", "	" }))
+		else
+			table.insert(nodes, t( " \\\\"))
+		end
+
+	end
+
+	return sn(nil, nodes)
+end
+
 return {
 	s(
 		{
@@ -76,6 +97,32 @@ return {
 					t("b")
 				}),
 				d(2, gen_matrix),
+				rep(1),
+				i(0)
+
+			}
+		)
+	),
+	s(
+		{
+			trig = "v(%d+)",
+			regTrig = true,
+			wordTrig = false,
+			snippetType = "autosnippet",
+			condition = in_mathzone,
+		},
+		fmta(
+			[[
+			\begin{<>matrix}
+				<>
+			\end{<>matrix}<>
+			]],
+			{
+				c(1, {
+					t("p"),
+					t("b")
+				}),
+				d(2, gen_vector),
 				rep(1),
 				i(0)
 
