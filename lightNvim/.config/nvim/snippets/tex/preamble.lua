@@ -37,6 +37,8 @@ return {
 %\usetikzlibrary{graphs, graphdrawing}
 %\usegdlibrary{circular}
 
+\newcommand{\diff}{\ensuremath{\operatorname{d}\!}}
+
 % ---------------------------------------------------------
 % MISE EN PAGE
 % ---------------------------------------------------------
