@@ -2,7 +2,7 @@ local ls = require("luasnip")
 local tex_utils = require("tex.utils")
 
 local in_mathzone = tex_utils.in_mathzone
-local in_equation = tex_utils.in_equation
+local in_text = tex_utils.in_text
 
 local s = ls.snippet
 local sn = ls.snippet_node
@@ -142,6 +142,32 @@ return {
 			i(1),
 			i(2),
 			i(3),
+			i(0)
+		})
+	),
+	s(
+		{
+		trig = "dm",
+		condition = in_text,
+		},
+		fmta([[
+			$$
+			<>
+			$$
+		]],
+		{
+			i(0)
+		})
+	),
+	s(
+		{
+		trig = "im",
+		condition = in_text,
+		},
+		fmta([[
+			$ <> $
+		]],
+		{
 			i(0)
 		})
 	),
