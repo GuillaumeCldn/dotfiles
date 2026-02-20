@@ -128,5 +128,21 @@ return {
 
 			}
 		)
-	)
+	),
+	s(
+		{
+		trig = "ii",
+		snippetType = "autosnippet",
+		condition = in_mathzone,
+		},
+		fmta([[
+			\int_{<>}^{<>}<>\diff <>
+		]],
+		{
+			i(1),
+			i(2),
+			i(3),
+			i(0)
+		})
+	),
 }
