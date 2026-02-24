@@ -4,13 +4,41 @@ local s = ls.snippet
 local t = ls.text_node
 local i = ls.insert_node
 local c = ls.choice_node
+local d = ls.dynamic_node
+local l = require("luasnip.extras").lambda
+local sn = ls.snippet_node
 local fmta = require("luasnip.extras.fmt").fmta
+
+local function gen_authors(_, snip)
+	local rows = tonumber(snip.captures[1]) or 1
+	local nodes = {}
+	local index = 1
+
+	for row = 1, rows do
+
+		table.insert(nodes, t({"", "	\\Large "}))
+		table.insert(nodes, i(index, "Prénom"))
+		table.insert(nodes, t(" "))
+		table.insert(nodes, i(index+1, "Nom"))
+		table.insert(nodes, t({" \\\\", "	\\texttt{"}))
+		table.insert(nodes, l(l._1:lower(), {index}))
+		table.insert(nodes, t("."))
+		table.insert(nodes, l(l._1:lower(), {index+1}))
+		table.insert(nodes, t({"@alumni.enac.fr}\\\\[1.2em]", ""}))
+
+		index = index + 2
+	end
+
+	return sn(nil, nodes)
+end
 
 return {
 	s(
 		{
-			trig = "ENAC",
+			trig = "ENAC(%d+)",
 			snippetType = "autosnippet",
+			regTrig = true,
+			wordTrig = false
 		},
 		fmta([[
 \documentclass[12pt,oneside]{scrreprt}
@@ -37,6 +65,7 @@ return {
 %\usetikzlibrary{graphs, graphdrawing}
 %\usegdlibrary{circular}
 
+% Better diff symbol
 \newcommand{\diff}{\ensuremath{\operatorname{d}\!}}
 
 % ---------------------------------------------------------
@@ -72,9 +101,8 @@ font=\normalfont\large\bfseries]{subsection}
 \title{\Huge \bfseries <>}
 
 \author{%
-	\Large <>\\
-	\texttt{guillaume.claudon@alumni.enac.fr}\\[1.2em]
-	\large École Nationale de l’Aviation Civile (ENAC)%
+	<>
+	\large <> %
 }
 
 \date{<>}
@@ -83,9 +111,7 @@ font=\normalfont\large\bfseries]{subsection}
 
 % ---------------------------------------------------------
 
-\publishers{
-	\includegraphics[width=4cm]{<>}
-}
+<>
 
 \begin{document}
 % ---------------------------------------------------------
@@ -104,10 +130,15 @@ font=\normalfont\large\bfseries]{subsection}
 			]],
 			{
 				i(1, "title"),
-				i(2, "author"),
-				i(3, "date"),
-				c(4, {
-					i(nil, "logo"),
+				d(2, gen_authors),
+				c(3, {
+					t("École Nationale de l’Aviation Civile (ENAC)"),
+					i(nil, "other"),
+				}),
+				i(4, "date"),
+				c(5, {
+					i(nil),
+					sn(nil, { t({"\\publishers{", "	\\includegraphics[width=4cm]{"}), c(1, {t("logo_ENAC.png"), i(nil, "logo")}), t({"}", "}"})}),
 					t(""),
 				}),
 				i(0)
