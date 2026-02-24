@@ -39,16 +39,16 @@ local function gen_matrix(_, snip)
 end
 
 local function gen_vector(_, snip)
-	local cols = tonumber(snip.captures[1])
+	local rows = tonumber(snip.captures[1])
 	local nodes = {}
 	local insert_index = 1
 
-	for col = 1, cols do
+	for row = 1, rows do
 
 		table.insert(nodes, i(insert_index))
 		insert_index = insert_index + 1
 
-		if col < cols then
+		if row < rows then
 			table.insert(nodes, t({ " \\\\", "	" }))
 		else
 			table.insert(nodes, t( " \\\\"))
