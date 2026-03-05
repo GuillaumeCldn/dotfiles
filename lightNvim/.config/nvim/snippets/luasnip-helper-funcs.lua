@@ -43,7 +43,9 @@ function M.rec_ls()
 end
 
 function M.date_input()
-	return sn(nil, i(1, os.date("%d-%m-%Y")))
+	return sn(nil, i(1, os.date("%d/%m/%Y")))
 end
 
 return M
+
+
