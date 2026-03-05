@@ -131,3 +131,6 @@ export PATH="$HOME/.local/share/bob/nvim-bin:$PATH"
 # >>> Added by Spyder >>>
 alias uninstall-spyder=/Users/guiguiclaudon/Library/spyder-6/uninstall-spyder.sh
 # <<< Added by Spyder <<<
+
+#———GHIDRA———
+alias ghidra="~/Documents/Ghidra\ 12.0.4/ghidraRun"
