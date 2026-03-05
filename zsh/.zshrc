@@ -111,7 +111,7 @@ eval "$(atuin init zsh)"
 export PATH="$HOME/.local/share/bob/nvim-bin:$PATH"
 
 #———GHIDRA———
-alias ghidra="~/Documents/Ghidra\ 12.0.4/ghidraRun"
+alias ghidra="/Users/guiguiclaudon/Applications/Ghidra\ 12.0.4/ghidraRun"
 
 #———CONDA———
 # >>> conda initialize >>>
