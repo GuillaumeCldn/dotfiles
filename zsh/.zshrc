@@ -1,21 +1,3 @@
-
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/Users/guiguiclaudon/Documents/Python/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "/Users/guiguiclaudon/Documents/Python/anaconda3/etc/profile.d/conda.sh" ]; then
-        . "/Users/guiguiclaudon/Documents/Python/anaconda3/etc/profile.d/conda.sh"
-    else
-        export PATH="/Users/guiguiclaudon/Documents/Python/anaconda3/bin:$PATH"
-	export MODULAR_HOME="'$HOME'/.modular"
-	export PATH="'$MOJO_PATH'/bin:$PATH"
-    fi
-fi
-unset __conda_setup
-# <<< conda initialize <<<
-
 #———MODULAR———
 export MODULAR_HOME="/Users/guiguiclaudon/.modular"
 export PATH="/Users/guiguiclaudon/.modular/pkg/packages.modular.com_mojo/bin:$PATH"
@@ -128,9 +110,28 @@ eval "$(atuin init zsh)"
 #———BOB NVIM MANAGER———
 export PATH="$HOME/.local/share/bob/nvim-bin:$PATH"
 
+#———GHIDRA———
+alias ghidra="~/Documents/Ghidra\ 12.0.4/ghidraRun"
+
+#———CONDA———
+# >>> conda initialize >>>
+# Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/Users/guiguiclaudon/Documents/Python/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/Users/guiguiclaudon/Documents/Python/anaconda3/etc/profile.d/conda.sh" ]; then
+        . "/Users/guiguiclaudon/Documents/Python/anaconda3/etc/profile.d/conda.sh"
+    else
+        export PATH="/Users/guiguiclaudon/Documents/Python/anaconda3/bin:$PATH"
+	export MODULAR_HOME="'$HOME'/.modular"
+	export PATH="'$MOJO_PATH'/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
+
+#———SPYDER———
 # >>> Added by Spyder >>>
 alias uninstall-spyder=/Users/guiguiclaudon/Library/spyder-6/uninstall-spyder.sh
 # <<< Added by Spyder <<<
-
-#———GHIDRA———
-alias ghidra="~/Documents/Ghidra\ 12.0.4/ghidraRun"
