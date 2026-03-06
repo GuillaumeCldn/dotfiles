@@ -70,7 +70,7 @@ alias gco="git checkout"
 alias gb='git branch'
 alias gba='git branch -a'
 alias gadd='git add'
-alias glog="git log --graph --topo-order --pretty='%w(100,0,6)%C(yellow)%h%C(bold)%C(black)%d %C(cyan)%ar %C(green)%an%n%C(bold)%C(white)%s %N' --abbrev-commit"
+alias glog="git log --graph --topo-order --pretty='%w(100,0,6)%C(yellow)%h%C(bold)%C(red)%d %C(cyan)%ar %C(green)%an%n%C(bold)%C(189)%s %N' --abbrev-commit"
 
 #———THEFUCK———
 eval $(thefuck --alias fk)
