@@ -81,6 +81,12 @@ eval "$(zoxide init zsh)"
 #———EZA———
 alias eza="eza -1 --icons=auto"
 
+#———TMUX———
+alias ta="tmux attach"
+alias tn="tmux new -s"
+alias tx="tmux kill-session -t"
+alias tl="tmux list-sessions"
+
 
 #———BETTER HISTORY MANAGEMENT———
 HISTFILE=$HOME/.zhistory
