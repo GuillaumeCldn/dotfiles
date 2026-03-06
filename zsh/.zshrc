@@ -65,12 +65,14 @@ export BAT_THEME="Catppuccin Mocha"
 alias gc="git commit -m"
 alias gca="git commit -a -m"
 alias gst="git status"
-alias gdiff="git diff"
+alias gd="git diff"
+alias gs="git switch"
 alias gco="git checkout"
 alias gb='git branch'
 alias gba='git branch -a'
-alias gadd='git add'
-alias glog="git log --graph --topo-order --pretty='%w(100,0,6)%C(yellow)%h%C(bold)%C(red)%d %C(cyan)%ar %C(green)%an%n%C(bold)%C(189)%s %N' --abbrev-commit"
+alias ga='git add'
+alias gap='git add -p'
+alias gl="git log --graph --topo-order --pretty='%w(100,0,6)%C(yellow)%h%C(bold)%C(red)%d %C(cyan)%ar %C(green)%an%n%C(bold)%C(189)%s %N' --abbrev-commit"
 
 #———THEFUCK———
 eval $(thefuck --alias fk)
