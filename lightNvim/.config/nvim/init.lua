@@ -120,6 +120,7 @@ vim.pack.add({
 	{ src = "https://github.com/lervag/vimtex" },
 	{ src = "https://github.com/nvim-treesitter/nvim-treesitter" },
 	{ src = "https://github.com/L3MON4D3/LuaSnip" },
+	{ src = "https://github.com/christoomey/vim-tmux-navigator" },
 })
 
 -- Package activation
@@ -147,7 +148,7 @@ ls.config.set_config {
 		},
 	},
 }
-require("luasnip.loaders.from_lua").lazy_load({paths = "~/.config/nvim/snippets/"})
+require("luasnip.loaders.from_lua").lazy_load({ paths = "~/.config/nvim/snippets/" })
 require("nvim-treesitter").setup({
 	build = ':TSUpdate',
 	ensure_installed = {
@@ -179,9 +180,9 @@ vim.diagnostic.config({
 })
 
 -- Luasnip keymaps
-vim.cmd[[
+vim.cmd [[
    " Vimscript goes here!" Expand or jump in insert mode
-	imap <silent><expr> <Tab> luasnip#expand_or_jumpable() ? '<Plug>luasnip-expand-or-jump' : '<Tab>' 
+	imap <silent><expr> <Tab> luasnip#expand_or_jumpable() ? '<Plug>luasnip-expand-or-jump' : '<Tab>'
 	" Jump forward through tabstops in visual mode
 	smap <silent><expr> <Tab> luasnip#jumpable(1) ? '<Plug>luasnip-jump
 	" Jump backward through snippet tabstops with Shift-Tab (for example)
@@ -193,12 +194,13 @@ vim.keymap.set({ "i", "s" }, "<C-E>", function()
 		ls.change_choice(1)
 	end
 end, { silent = true })
-vim.keymap.set('n', '<Leader>LS', '<Cmd>lua require("luasnip.loaders.from_lua").load({paths = "~/.config/nvim/snippets/"})<CR>')
+vim.keymap.set('n', '<Leader>LS',
+	'<Cmd>lua require("luasnip.loaders.from_lua").load({paths = "~/.config/nvim/snippets/"})<CR>')
 
 
 -- Spellcheck configuration
 vim.g.spellfile_URL = "https://www.mirrorservice.org/sites/ftp.vim.org/pub/vim/runtime/spell/"
-vim.opt.spelllang = {'en_gb', 'fr', 'de'}
+vim.opt.spelllang = { 'en_gb', 'fr', 'de' }
 vim.opt.spell = true
 vim.keymap.set('i', '<C-m>', '<c-g>u<Esc>[s1z=`]a<c-g>u', { desc = "Correct last misspelled word" })
 
