@@ -1,10 +1,12 @@
 -- General
 vim.opt.number = true
 vim.opt.relativenumber = true
-vim.opt.cursorline = true        -- This must still be enabled
+vim.opt.cursorline = true
 vim.opt.cursorlineopt = 'number' -- Restricts highlighting to the number column only
 vim.opt.swapfile = false
 vim.opt.wrap = true
+vim.opt.linebreak = true
+vim.opt.breakindent = true
 
 -- Indentation
 vim.opt.tabstop = 4
