@@ -186,7 +186,7 @@ vim.cmd [[
    " Vimscript goes here!" Expand or jump in insert mode
 	imap <silent><expr> <Tab> luasnip#expand_or_jumpable() ? '<Plug>luasnip-expand-or-jump' : '<Tab>'
 	" Jump forward through tabstops in visual mode
-	smap <silent><expr> <Tab> luasnip#jumpable(1) ? '<Plug>luasnip-jump
+	smap <silent><expr> <Tab> luasnip#jumpable(1) ? '<Plug>luasnip-jump' : '<Tab>'
 	" Jump backward through snippet tabstops with Shift-Tab (for example)
 	imap <silent><expr> <S-Tab> luasnip#jumpable(-1) ? '<Plug>luasnip-jump-prev' : '<S-Tab>'
 	smap <silent><expr> <S-Tab> luasnip#jumpable(-1) ? '<Plug>luasnip-jump-prev' : '<S-Tab>'-next' : '<Tab>'
@@ -204,7 +204,7 @@ vim.keymap.set('n', '<Leader>LS',
 vim.g.spellfile_URL = "https://www.mirrorservice.org/sites/ftp.vim.org/pub/vim/runtime/spell/"
 vim.opt.spelllang = { 'en_gb', 'fr', 'de' }
 vim.opt.spell = true
-vim.keymap.set('i', '<C-m>', '<c-g>u<Esc>[s1z=`]a<c-g>u', { desc = "Correct last misspelled word" })
+vim.keymap.set('i', '<C-l>', '<c-g>u<Esc>[s1z=`]a<c-g>u', { desc = "Correct last misspelled word" })
 
 -- Colourscheme & background
 vim.cmd.colorscheme("catppuccin-macchiato")
