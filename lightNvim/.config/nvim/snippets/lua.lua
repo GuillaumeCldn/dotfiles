@@ -61,4 +61,28 @@ return {
 			i(0)
 		})
 	),
+	s({ trig = "tsnip", snippetType = "autosnippet" },
+		fmta([[
+			s(
+				{
+				trig = "<>",
+				snippetType = "<>",
+				},
+				<>
+			),
+			]],
+			{
+				i(1, "trigger"),
+				c(2, {
+					t("autosnippet"),
+					t("snippet"),
+				}),
+				c(3, {
+					sn(nil, { t({"{", "		"}), i(1), t({"","	}"}) }),
+					sn(nil, { t({"fmta([[", "		"}), i(1), t({"","	]],", "	{", "		"}), i(2), t({"","	})"}) }),
+					sn(nil, { t({"fmt([[", "		"}), i(1), t({"","	]],", "	{", "		"}), i(2), t({"","	})"}) }),
+				})
+			}
+		)
+	),
 }
