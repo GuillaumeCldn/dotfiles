@@ -1,3 +1,4 @@
+-- Imports
 require("luasnip-helper-funcs")
 local ls = require("luasnip")
 local s = ls.snippet
@@ -9,7 +10,9 @@ local l = require("luasnip.extras").lambda
 local sn = ls.snippet_node
 local fmta = require("luasnip.extras.fmt").fmta
 
-local function gen_authors(_, snip)
+
+-- Utils
+local function gen_authors_ENAC(_, snip)
 	local rows = tonumber(snip.captures[1]) or 1
 	local nodes = {}
 	local index = 1
@@ -32,6 +35,30 @@ local function gen_authors(_, snip)
 	return sn(nil, nodes)
 end
 
+local function gen_authors_IFAC(_, snip)
+	local rows = tonumber(snip.captures[1]) or 1
+	local nodes = {}
+	local index = 1
+
+	for row = 1, rows do
+
+		table.insert(nodes, t({"\\author[A"..row.."]{"}))
+		table.insert(nodes, i(index, "Prénom"))
+		table.insert(nodes, t(" "))
+		table.insert(nodes, i(index+1, "Nom"))
+		table.insert(nodes, t({"}", "\\address[A"..row.."]{Ecole Nationale de l'Aviation Civile, Toulouse France (e-mail: "}))
+		table.insert(nodes, l(l._1:lower(), {index}))
+		table.insert(nodes, t("."))
+		table.insert(nodes, l(l._1:lower(), {index+1}))
+		table.insert(nodes, t({"@alumni.enac.fr)}", ""}))
+
+		index = index + 2
+	end
+
+	return sn(nil, nodes)
+end
+
+-- Snippets
 return {
 	s(
 		{
@@ -130,19 +157,122 @@ font=\normalfont\large\bfseries]{subsection}
 			]],
 			{
 				i(1, "title"),
-				d(2, gen_authors),
+				d(2, gen_authors_ENAC),
 				c(3, {
 					t("École Nationale de l’Aviation Civile (ENAC)"),
 					i(nil, "other"),
 				}),
 				i(4, "date"),
 				c(5, {
-					i(nil),
+					i(nil, "logo"),
 					sn(nil, { t({"\\publishers{", "	\\includegraphics[width=4cm]{"}), c(1, {t("logo_ENAC.png"), i(nil, "logo")}), t({"}", "}"})}),
 					t(""),
 				}),
 				i(0)
 			}
 		)
+	),
+	s(
+		{
+		trig = "IFAC(%d+)",
+		snippetType = "autosnippet",
+		regTrig = true,
+		wordTrig = false
+		},
+		fmta([[
+			
+\documentclass{ifacconf}
+
+% ---------------------------------------------------------
+% PACKAGES
+% ---------------------------------------------------------
+\usepackage{natbib}        % required for bibliography
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{siunitx}
+\usepackage{booktabs}
+\usepackage[hidelinks]{hyperref}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{float}
+\usepackage{fmtcount}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta, matrix, decorations.pathreplacing, calc}
+\usepackage{wrapfig}
+%\usetikzlibrary{graphs, graphdrawing}
+%\usegdlibrary{circular}
+
+\newcommand{\diff}{\ensuremath{\operatorname{d}\!}}% Better diff symbol
+
+
+\begin{document}
+
+\begin{frontmatter}
+\title{<>\thanksref{footnoteinfo}} 
+
+\thanks[footnoteinfo]{<>}
+
+<>
+
+\begin{abstract}   
+<>
+\end{abstract}
+
+\begin{keyword}
+<>
+\end{keyword}
+
+\end{frontmatter}
+
+<>
+<>
+
+<>
+
+\end{document}
+		]],
+		{
+			i(1, "Title"),
+			i(2, "Acknowledgments"),
+			d(3, gen_authors_IFAC),
+			i(4, "Abstract"),
+			i(5, "Keywords"),
+			c(6, {
+				i(nil, "Logo right"),
+				sn(nil, fmta(
+					[[
+\begin{tikzpicture}[remember picture, overlay]
+\node[anchor=north west, xshift=1cm, yshift=0cm] at (current page.north west) {
+\includegraphics[width=4cm]{<>}};
+\end{tikzpicture}
+					]],
+					{
+						i(1, "Logo name")
+					}
+				)
+				),
+				t(""),
+			}),
+			c(7, {
+				i(nil, "Logo left"),
+				sn(nil, fmta(
+					[[
+\begin{tikzpicture}[remember picture, overlay]
+\node[anchor=north east, xshift=0cm, yshift=0cm] at (current page.north east) {
+\includegraphics[width=4cm]{<>}};
+\end{tikzpicture}
+					]],
+					{
+						i(1, "Logo name")
+					}
+				)
+				),
+				t(""),
+			}),
+			i(0),
+
+		})
 	),
 }
