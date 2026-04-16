@@ -25,4 +25,19 @@ return {
 			rep(1)
 		})
 	),
+	s(
+		{
+		trig = "mc",
+		snippetType = "autosnippet",
+		condition = in_text,
+		},
+		fmta([[
+			\begin{multicols}{2}
+			<>
+			\end{multicols}
+		]],
+		{
+			i(0)
+		})
+	),
 }
