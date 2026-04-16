@@ -8,6 +8,7 @@ return {
 		{
 		trig = "txt",
 		snippetType = "autosnippet",
+		wordTrig = false,
 		},
 		fmta([[
 		#text[<>]<>
@@ -16,5 +17,61 @@ return {
 			i(1),
 			i(0)
 		})
+	),
+	s(
+		{
+		trig = "$$",
+		snippetType = "autosnippet",
+		},
+		fmta([[
+			$<>$<>
+		]],
+		{
+			i(1),
+			i(0)
+		})
+	),
+	s(
+		{
+		trig = "dm",
+		snippetType = "autosnippet",
+		},
+		fmta([[
+			$ <> $
+		]],
+		{
+			i(0)
+		})
+	),
+	s(
+		{
+		trig = "%%",
+		snippetType = "autosnippet",
+		},
+		fmta([[
+			|<>|<>
+		]],
+		{
+			i(1),
+			i(0)
+		})
+	),
+	s(
+		{
+		trig = "bcksl",
+		snippetType = "autosnippet",
+		},
+		{
+			t("#sym.backslash")
+		}
+	),
+	s(
+		{
+		trig = "slsh",
+		snippetType = "autosnippet",
+		},
+		{
+			t("#sym.slash")
+		}
 	),
 }
