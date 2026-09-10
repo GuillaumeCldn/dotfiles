@@ -11,7 +11,8 @@ local in_text = tex_utils.in_text
 return {
 	s(
 		{
-		trig = "en",
+		trig = "evq",
+		snippetType = "autosnippet",
 		condition = in_text,
 		},
 		fmta([[
