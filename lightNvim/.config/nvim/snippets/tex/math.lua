@@ -148,6 +148,7 @@ return {
 	s(
 		{
 		trig = "dmq",
+		snippetType = "autosnippet",
 		condition = in_text,
 		},
 		fmta([[
@@ -162,6 +163,7 @@ return {
 	s(
 		{
 		trig = "imq",
+		snippetType = "autosnippet",
 		condition = in_text,
 		},
 		fmta([[
