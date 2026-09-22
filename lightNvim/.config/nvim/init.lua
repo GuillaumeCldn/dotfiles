@@ -121,18 +121,18 @@ vim.api.nvim_create_autocmd('FileType', {
 
 -- Package installation
 vim.pack.add({
+	{ src = "https://github.com/lervag/vimtex" },
 	{ src = "https://github.com/catppuccin/nvim" },
-	{ src = "https://github.com/chomosuke/typst-preview.nvim" },
+	{ src = "https://github.com/L3MON4D3/LuaSnip" },
+	{ src = "https://github.com/Freedzone/kerbovim" },
 	{ src = "https://github.com/nvim-mini/mini.pick" },
 	{ src = "https://github.com/nvim-mini/mini.icons" },
-	{ src = "https://github.com/Freedzone/kerbovim" },
+	{ src = "https://github.com/lewis6991/gitsigns.nvim" },
 	{ src = "https://github.com/folke/todo-comments.nvim" },
 	{ src = "https://github.com/nvim-lualine/lualine.nvim" },
-	{ src = "https://github.com/lewis6991/gitsigns.nvim" },
-	{ src = "https://github.com/lervag/vimtex" },
-	{ src = "https://github.com/nvim-treesitter/nvim-treesitter" },
-	{ src = "https://github.com/L3MON4D3/LuaSnip" },
+	{ src = "https://github.com/chomosuke/typst-preview.nvim" },
 	{ src = "https://github.com/christoomey/vim-tmux-navigator" },
+	{ src = "https://github.com/nvim-treesitter/nvim-treesitter" },
 })
 
 -- Package activation
