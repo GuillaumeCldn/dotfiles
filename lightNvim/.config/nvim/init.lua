@@ -113,6 +113,11 @@ vim.api.nvim_create_autocmd('LspAttach', {
 	end,
 })
 
+vim.api.nvim_create_autocmd('FileType', {
+	group = augroup,
+	pattern = { 'c', 'python', 'sh', 'lua' },
+	callback = function() vim.treesitter.start() end,
+})
 
 -- Package installation
 vim.pack.add({
@@ -156,21 +161,7 @@ ls.config.set_config {
 	},
 }
 require("luasnip.loaders.from_lua").lazy_load({ paths = "~/.config/nvim/snippets/" })
-require("nvim-treesitter").setup({
-	build = ':TSUpdate',
-	ensure_installed = {
-		'lua'
-	},
-	auto_install = false,
-	highlight = {
-		enable = true,
-		disable = { "latex" },
-		additional_vim_regex_highlighting = false,
-	},
-	indent = {
-		enable = true,
-	},
-})
+require("nvim-treesitter").setup()
 vim.g.vimtex_view_method = "skim"
 vim.g.vimtex_compiler_progname = "nvr"
 vim.opt.conceallevel = 1
