@@ -124,3 +124,6 @@ alias ghidra="/Users/guiguiclaudon/Applications/Ghidra\ 12.0.4/ghidraRun"
 
 #———TELEVISION———
 # eval "$(tv init zsh)"
+
+#———VIM MODE———
+source "$(brew --prefix)/opt/zsh-vi-mode/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh"
