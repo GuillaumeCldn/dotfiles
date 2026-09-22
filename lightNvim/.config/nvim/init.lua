@@ -138,7 +138,12 @@ vim.pack.add({
 -- Package activation
 require("mini.pick").setup()
 require("todo-comments").setup()
-require("lualine").setup({ sections = { lualine_y = { "lsp_status" } } })
+require("lualine").setup({
+	sections = {
+		lualine_x = { 'encoding', 'filetype' },
+		lualine_y = { "lsp_status" }
+	},
+})
 require("gitsigns").setup()
 package.path = package.path .. ";" .. vim.fn.expand("~/.config/nvim/snippets/?.lua")
 local ls = require("luasnip")
