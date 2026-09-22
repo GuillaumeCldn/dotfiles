@@ -24,9 +24,14 @@ vim.opt.winborder = "rounded"
 vim.opt.termguicolors = true
 vim.opt.signcolumn = "yes"
 vim.opt.winblend = 0
-vim.opt.pumblend = 10
-vim.opt.pumheight = 10
-vim.opt.completeopt = "noinsert,noselect"
+
+-- Completion settings
+vim.opt.autocomplete = true
+vim.opt.autocompletedelay = 250
+vim.opt.complete = "o"
+vim.opt.completeopt = "menuone,noselect,noinsert"
+vim.opt.pumblend = 5
+vim.opt.pumheight = 5
 
 -- Keymaps
 vim.g.mapleader = " "
@@ -96,14 +101,11 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 })
 
 vim.api.nvim_create_autocmd('LspAttach', {
+	group = augroup,
 	callback = function(ev)
-		local client = vim.lsp.get_client_by_id(ev.data.client_id)
+		local client = assert(vim.lsp.get_client_by_id(ev.data.client_id))
 		if client:supports_method('textDocument/completion') then
-			vim.opt.completeopt = { 'menu', 'menuone', 'noinsert', 'fuzzy', 'popup' }
-			vim.lsp.completion.enable(true, client.id, ev.buf, { autotrigger = true })
-			vim.keymap.set('i', '<C-Space>', function()
-				vim.lsp.completion.get()
-			end)
+			vim.lsp.completion.enable(true, client.id, ev.buf)
 		end
 	end,
 })
