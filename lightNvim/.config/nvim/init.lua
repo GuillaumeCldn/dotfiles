@@ -35,10 +35,13 @@ vim.opt.pumheight = 5
 
 -- Keymaps
 vim.g.mapleader = " "
-vim.keymap.set("n", "<leader>so", ":update<CR> :source<CR>")
-vim.keymap.set("n", "<leader>lf", vim.lsp.buf.format)
-vim.keymap.set("n", "<leader>f", ":Pick files<CR>")
-vim.keymap.set("n", "<leader>h", ":Pick help<CR>")
+vim.keymap.set("n", "<leader>so", ":update<CR> :source<CR>", { desc = "Source current file" })
+vim.keymap.set("n", "<leader>re", ":restart<CR>", { desc = "Restart Neovim" })
+vim.keymap.set("n", "<leader>lf", vim.lsp.buf.format, { desc = "Format code using LSP" })
+vim.keymap.set("n", "<leader>f", ":Pick files<CR>", { desc = "Open file picker" })
+vim.keymap.set("n", "<leader>h", ":Pick help<CR>", { desc = "Open help picker" })
+vim.keymap.set("n", "<leader>gl", vim.diagnostic.open_float, { desc = "Open diagnostic" })
+vim.keymap.set("n", "<leader>H", ":noh<CR>", { desc = "Hide search highlighting" })
 
 -- Center screen when jumping
 vim.keymap.set("n", "n", "nzzzv", { desc = "Next search result (centered)" })
@@ -87,7 +90,7 @@ vim.keymap.set("n", "<leader>pa", function()
 	local path = vim.fn.expand("%:p")
 	vim.fn.setreg("+", path)
 	print("file:", path)
-end)
+end, { desc = "Copy current file path (absolute)" })
 
 -- Basic autocommands
 local augroup = vim.api.nvim_create_augroup("UserConfig", {})
