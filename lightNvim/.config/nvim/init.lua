@@ -136,6 +136,7 @@ vim.pack.add({
 })
 
 -- Package activation
+require("vim._core.ui2").enable({})
 require("mini.pick").setup()
 require("todo-comments").setup()
 require("lualine").setup({
@@ -214,6 +215,7 @@ vim.cmd.colorscheme("catppuccin-macchiato")
 vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
 vim.api.nvim_set_hl(0, "NormalNC", { bg = "none" })
 vim.api.nvim_set_hl(0, "EndOfBuffer", { bg = "none" })
+vim.api.nvim_set_hl(0, "WinSeparator", { fg = "Grey", bg = "none" })
 
 -- ============================================================================
 -- TABS
