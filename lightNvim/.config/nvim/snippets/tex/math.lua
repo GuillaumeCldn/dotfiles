@@ -62,7 +62,7 @@ end
 return {
 	s(
 		{
-			trig = "fr",
+			trig = "ff",
 			snippetType = "autosnippet",
 			condition = in_mathzone,
 		},
@@ -147,7 +147,8 @@ return {
 	),
 	s(
 		{
-		trig = "dm",
+		trig = "dmq",
+		snippetType = "autosnippet",
 		condition = in_text,
 		},
 		fmta([[
@@ -161,7 +162,8 @@ return {
 	),
 	s(
 		{
-		trig = "im",
+		trig = "imq",
+		snippetType = "autosnippet",
 		condition = in_text,
 		},
 		fmta([[
