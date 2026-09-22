@@ -82,6 +82,7 @@ eval "$(zoxide init zsh)"
 
 #———EZA———
 alias eza="eza -1 --icons=auto"
+alias ezat="eza -T -L 3"
 
 #———TMUX———
 alias ta="tmux attach"
