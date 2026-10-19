@@ -1,8 +1,12 @@
-require("luasnip-helper-funcs")
+local helpers = require("luasnip-helper-funcs")
+local get_visual = helpers.get_visual
 local ls = require("luasnip")
 local s = ls.snippet
 local t = ls.text_node
 local i = ls.insert_node
+local d = ls.dynamic_node
+local c = ls.choice_node
+local sn = ls.snippet_node
 local fmta = require("luasnip.extras.fmt").fmta
 
 return {
@@ -35,19 +39,118 @@ return {
 				i(0)
 			})
 	),
+	-- Italic
+	s({ trig = "_", wordTrig = false, snippetType = "autosnippet" },
+		fmta([[
+			'_<>_'
+			]],
+			{
+				d(1, get_visual),
+			}
+		)
+	),
 	-- Bold
 	s({ trig = "*", wordTrig = false, snippetType = "autosnippet" },
+		fmta([[
+			'*<>*'
+			]],
+			{
+				d(1, get_visual),
+			}
+		)
+	),
+	s(
 		{
-			t("*"),
-			d(1, get_visual),
-			t("*"),
-		}),
-	-- Itallic
-	s({ trig = "_", wordTrig = false, snippetType = "autosnippet" },
+		trig = "TOC",
+		snippetType = "autosnippet",
+		},
+		fmta([[
+#outline(title: <>, indent: auto)<>
+			]],
+			{
+				c(1, {
+					t("auto"),
+					sn(nil, {
+						t("["),
+						i(1, "title"),
+						t("]"),
+					})
+				}),
+				i(0)
+			}
+		)
+	),
+	s(
 		{
-			t("_"),
-			d(1, get_visual),
-			t("_"),
+		trig = "jstf",
+		snippetType = "autosnippet",
+		},
+		{
+			t("#set par(justify: true)")
 		}
+	),
+	s(
+		{
+		trig = "hdg",
+		snippetType = "autosnippet",
+		},
+		fmta([[
+#set heading(numbering: <>)<>
+		]],
+		{
+			c(1, {
+				t('"1.1."'),
+				i(nil, "numbering convention")
+			}),
+			i(0)
+		})
+	),
+	s(
+		{
+		trig = "pge",
+		snippetType = "autosnippet",
+		},
+		fmta([[
+#set page(
+  paper: <>,
+  margin: (x: 2.5cm, y: 3cm),
+  numbering: <>,
+  number-align: <>
+)<>
+		]],
+		{
+			c(1, {t('"a4"'), i(nil, "page size")}),
+			c(2, {t('"1"'), i(nil, "page numbering")}),
+			c(3, {t("center + bottom"), i(nil, "numbering location")}),
+			i(0)
+		})
+	),
+	s(
+		{
+		trig = "lng",
+		snippetType = "autosnippet",
+		},
+		fmta([[
+#set text(lang: <>, font: <>, size: 11pt)<>
+		]],
+		{
+			c(1, {t('"fr"'), t('"en"'), t('"de"'), i(nil, "language code")}),
+			c(2, {t('"New Computer Modern"'), i(nil, "font name")}),
+			i(0)
+		})
+	),
+	s(
+		{
+		trig = "dct",
+		snippetType = "autosnippet",
+		},
+		fmta([[
+#set document(title: [<>], author: [<>])<>
+		]],
+		{
+			i(1),
+			i(2),
+			i(0)
+		})
 	),
 }
