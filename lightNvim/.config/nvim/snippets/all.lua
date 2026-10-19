@@ -55,14 +55,14 @@ return {
 			}
 		)
 	),
-	-- Paired single quotes
-	s({ trig = "'", wordTrig = false, snippetType = "autosnippet", priority = 2000 },
-		fmta(
-			"'<>'",
-			{
-				d(1, get_visual),
-			}
-		)
+	s(
+		{
+		trig = "szz",
+		snippetType = "autosnippet",
+		},
+		{
+			t("ß")
+		}
 	),
 }
 
