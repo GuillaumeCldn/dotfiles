@@ -1,4 +1,5 @@
-require("luasnip-helper-funcs")
+local helpers = require("luasnip-helper-funcs")
+local get_visual = helpers.get_visual
 
 local typst_utils = require("typst.utils")
 local in_mathzone = typst_utils.in_mathzone
@@ -8,6 +9,7 @@ local ls = require("luasnip")
 local s = ls.snippet
 local i = ls.insert_node
 local t = ls.text_node
+local d = ls.dynamic_node
 local fmta = require("luasnip.extras.fmt").fmta
 
 return {
@@ -89,6 +91,20 @@ return {
 		]],
 		{
 			i(1),
+			i(0)
+		})
+	),
+	s(
+		{
+		trig = "bd",
+		snippetType = "autosnippet",
+		condition = in_mathzone,
+		},
+		fmta([[
+			bold(<>)<>
+		]],
+		{
+			d(1, get_visual),
 			i(0)
 		})
 	),
