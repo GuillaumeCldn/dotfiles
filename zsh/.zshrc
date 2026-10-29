@@ -127,3 +127,6 @@ alias ghidra="/Users/guiguiclaudon/Applications/Ghidra\ 12.0.4/ghidraRun"
 
 #———VIM MODE———
 source "$(brew --prefix)/opt/zsh-vi-mode/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh"
+
+#———ANITGRAVITY CLI———
+export PATH="/Users/guiguiclaudon/.local/bin:$PATH"
