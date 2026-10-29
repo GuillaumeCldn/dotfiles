@@ -59,6 +59,7 @@ return {
 		{
 		trig = "szz",
 		snippetType = "autosnippet",
+		wordTrig = false,
 		},
 		{
 			t("ß")
