@@ -115,7 +115,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
 
 vim.api.nvim_create_autocmd('FileType', {
 	group = augroup,
-	pattern = { 'c', 'python', 'sh', 'lua' },
+	pattern = { 'c', 'cpp', 'python', 'sh', 'lua' },
 	callback = function() vim.treesitter.start() end,
 })
 
@@ -124,6 +124,8 @@ vim.pack.add({
 	{ src = "https://github.com/lervag/vimtex" },
 	{ src = "https://github.com/catppuccin/nvim" },
 	{ src = "https://github.com/L3MON4D3/LuaSnip" },
+	{ src = "https://github.com/folke/snacks.nvim"},
+	{ src = "https://github.com/Aietes/esp32.nvim"},
 	{ src = "https://github.com/Freedzone/kerbovim" },
 	{ src = "https://github.com/nvim-mini/mini.pick" },
 	{ src = "https://github.com/nvim-mini/mini.icons" },
@@ -175,7 +177,27 @@ vim.g.vimtex_compiler_progname = "nvr"
 vim.opt.conceallevel = 1
 vim.g.tex_conceal = "abdmg"
 
+-- require("snacks").setup({})
+require("esp32").setup({
+	build_dir = "build",
+	clangd_args = {
+		"--query-driver=**/*xtensa-esp-elf*,**/*esp32*",
+	},
+})
+
+-- ESP32 keybinds
+vim.keymap.set("n", "<leader>Rb", require("esp32").build, {
+  desc = "ESP32: Build",
+})
+
+vim.keymap.set("n", "<leader>Rf", function()
+  require("esp32").pick("flash")
+end, {
+  desc = "ESP32: Pick & Flash",
+})
+
 -- Language servers
+vim.lsp.config("clangd", require("esp32").lsp_config())
 vim.lsp.enable({ 'clangd', 'lua_ls', 'basedpyright', 'texlab', 'bashls', 'tinymist' })
 
 -- Diagnostics
