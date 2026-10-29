@@ -99,7 +99,7 @@ local augroup = vim.api.nvim_create_augroup("UserConfig", {})
 vim.api.nvim_create_autocmd("TextYankPost", {
 	group = augroup,
 	callback = function()
-		vim.highlight.on_yank() -- FIX: change to vim.hl.hl_op
+		vim.hl.hl_op()
 	end,
 })
 
@@ -119,6 +119,15 @@ vim.api.nvim_create_autocmd('FileType', {
 	callback = function() vim.treesitter.start() end,
 })
 
+-- INFO: Treesitter doesn't yet support highlighting or indentation for typst (10.2026)
+vim.api.nvim_create_autocmd('FileType', {
+	group = augroup,
+	pattern = 'typst',
+	callback = function(args)
+		vim.treesitter.start(args.buf)
+		vim.bo[args.buf].syntax = 'typst' -- Re-enables your syntax highlighting!
+	end,
+})
 -- Package installation
 vim.pack.add({
 	{ src = "https://github.com/lervag/vimtex" },

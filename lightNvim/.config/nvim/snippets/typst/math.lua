@@ -1,4 +1,9 @@
 require("luasnip-helper-funcs")
+
+local typst_utils = require("typst.utils")
+local in_mathzone = typst_utils.in_mathzone
+local in_text = typst_utils.in_text
+
 local ls = require("luasnip")
 local s = ls.snippet
 local i = ls.insert_node
@@ -10,6 +15,7 @@ return {
 		{
 			trig = "$$",
 			snippetType = "autosnippet",
+			condition = in_text
 		},
 		fmta([[
 			$<>$<>
@@ -23,6 +29,7 @@ return {
 		{
 			trig = "dm",
 			snippetType = "autosnippet",
+			condition = in_text
 		},
 		fmta([[
 			$ <> $
@@ -35,6 +42,7 @@ return {
 		{
 			trig = "%%",
 			snippetType = "autosnippet",
+			condition = in_mathzone
 		},
 		fmta([[
 			|<>|<>
@@ -48,6 +56,7 @@ return {
 		{
 		trig = "iit",
 		snippetType = "autosnippet",
+		condition = in_mathzone
 		},
 		fmta([[
 			integral_(<>)^(<>) <> dif <>
@@ -61,8 +70,9 @@ return {
 	),
 	s(
 		{
-		trig = "infty",
+		trig = "ity",
 		snippetType = "autosnippet",
+		condition = in_mathzone
 		},
 		{
 			t("infinity")
@@ -72,6 +82,7 @@ return {
 		{
 		trig = "ovln",
 		snippetType = "autosnippet",
+		condition = in_mathzone
 		},
 		fmta([[
 			overline(<>)<>

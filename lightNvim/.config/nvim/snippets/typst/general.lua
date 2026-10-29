@@ -1,5 +1,9 @@
 local helpers = require("luasnip-helper-funcs")
 local get_visual = helpers.get_visual
+
+local typst_utils = require("typst.utils")
+local in_text = typst_utils.in_text
+
 local ls = require("luasnip")
 local s = ls.snippet
 local t = ls.text_node
@@ -15,6 +19,7 @@ return {
 			trig = "txt",
 			snippetType = "autosnippet",
 			wordTrig = false,
+			condition = in_text
 		},
 		fmta([[
 		#text[<>]<>
@@ -28,6 +33,7 @@ return {
 		{
 			trig = "gadd",
 			snippetType = "autosnippet",
+			condition = in_text
 		},
 		fmta([[
 [<>], [<>],
@@ -40,9 +46,15 @@ return {
 			})
 	),
 	-- Italic
-	s({ trig = "_", wordTrig = false, snippetType = "autosnippet" },
+	s(
+		{
+			trig = "_",
+			wordTrig = false,
+			snippetType = "autosnippet",
+			condition = in_text
+		},
 		fmta([[
-			'_<>_'
+			_<>_
 			]],
 			{
 				d(1, get_visual),
@@ -50,9 +62,15 @@ return {
 		)
 	),
 	-- Bold
-	s({ trig = "*", wordTrig = false, snippetType = "autosnippet" },
+	s(
+		{
+			trig = "*",
+			wordTrig = false,
+			snippetType = "autosnippet",
+			condition = in_text
+		},
 		fmta([[
-			'*<>*'
+			*<>*
 			]],
 			{
 				d(1, get_visual),
@@ -61,8 +79,9 @@ return {
 	),
 	s(
 		{
-		trig = "TOC",
-		snippetType = "autosnippet",
+			trig = "TOC",
+			snippetType = "autosnippet",
+			condition = in_text
 		},
 		fmta([[
 #outline(title: <>, indent: auto)<>
@@ -82,8 +101,9 @@ return {
 	),
 	s(
 		{
-		trig = "jstf",
-		snippetType = "autosnippet",
+			trig = "jstf",
+			snippetType = "autosnippet",
+			condition = in_text
 		},
 		{
 			t("#set par(justify: true)")
@@ -91,24 +111,26 @@ return {
 	),
 	s(
 		{
-		trig = "hdg",
-		snippetType = "autosnippet",
+			trig = "hdg",
+			snippetType = "autosnippet",
+			condition = in_text
 		},
 		fmta([[
 #set heading(numbering: <>)<>
 		]],
-		{
-			c(1, {
-				t('"1.1."'),
-				i(nil, "numbering convention")
-			}),
-			i(0)
-		})
+			{
+				c(1, {
+					t('"1.1."'),
+					i(nil, "numbering convention")
+				}),
+				i(0)
+			})
 	),
 	s(
 		{
-		trig = "pge",
-		snippetType = "autosnippet",
+			trig = "pge",
+			snippetType = "autosnippet",
+			condition = in_text
 		},
 		fmta([[
 #set page(
@@ -118,39 +140,51 @@ return {
   number-align: <>
 )<>
 		]],
-		{
-			c(1, {t('"a4"'), i(nil, "page size")}),
-			c(2, {t('"1"'), i(nil, "page numbering")}),
-			c(3, {t("center + bottom"), i(nil, "numbering location")}),
-			i(0)
-		})
+			{
+				c(1, { t('"a4"'), i(nil, "page size") }),
+				c(2, { t('"1"'), i(nil, "page numbering") }),
+				c(3, { t("center + bottom"), i(nil, "numbering location") }),
+				i(0)
+			})
 	),
 	s(
 		{
-		trig = "lng",
-		snippetType = "autosnippet",
+			trig = "lng",
+			snippetType = "autosnippet",
+			condition = in_text
 		},
 		fmta([[
 #set text(lang: <>, font: <>, size: 11pt)<>
 		]],
-		{
-			c(1, {t('"fr"'), t('"en"'), t('"de"'), i(nil, "language code")}),
-			c(2, {t('"New Computer Modern"'), i(nil, "font name")}),
-			i(0)
-		})
+			{
+				c(1, { t('"fr"'), t('"en"'), t('"de"'), i(nil, "language code") }),
+				c(2, { t('"New Computer Modern"'), i(nil, "font name") }),
+				i(0)
+			})
 	),
 	s(
 		{
-		trig = "dct",
-		snippetType = "autosnippet",
+			trig = "dct",
+			snippetType = "autosnippet",
+			condition = in_text
 		},
 		fmta([[
 #set document(title: [<>], author: [<>])<>
 		]],
+			{
+				i(1),
+				i(2),
+				i(0)
+			})
+	),
+	s(
 		{
-			i(1),
-			i(2),
-			i(0)
-		})
+			trig = "brk",
+			snippetType = "autosnippet",
+			condition = in_text
+		},
+		{
+			t("#pagebreak()")
+		}
 	),
 }
