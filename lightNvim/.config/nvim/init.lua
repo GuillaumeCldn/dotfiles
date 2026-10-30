@@ -191,12 +191,13 @@ require("catppuccin").setup({
 		transparent = true,
 		solid = false,
 	},
-	custom_highlights = function(colors)
+	custom_highlights = function(colors) -- Fix typst syntax highlighting colours
 		return {
 			["@markup.strong"] = { fg = colors.text, bold = true },
 			["@text.strong"] = { fg = colors.text, bold = true },
 			["@typst.letter"] = { fg = colors.flamingo, italic = true },
 			["@markup.math.delimiter"] = { fg = colors.mauve },
+			["@markup.link.label"] = { fg = colors.teal },
 		}
 	end,
 })
