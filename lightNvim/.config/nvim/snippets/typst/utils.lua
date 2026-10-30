@@ -1,10 +1,14 @@
 local M = {}
 
--- Typst math node types across common tree-sitter parsers
-local MATH_NODES = {
+-- Delimited math containers (enclosed in $ ... $)
+local MATH_CONTAINERS = {
   math = true,
-  formula = true,
   equation = true,
+}
+
+-- Inner math nodes that only exist inside math mode
+local MATH_INNER = {
+  formula = true,
 }
 
 -- Nodes that break math context (e.g. text/strings or comments inside $ ... $)
@@ -39,6 +43,11 @@ end
 
 --- Returns true if cursor is currently inside a Typst math environment
 function M.in_mathzone()
+  local ok_p, parser = pcall(vim.treesitter.get_parser)
+  if ok_p and parser then
+    pcall(parser.parse, parser)
+  end
+
   local ok, node = pcall(vim.treesitter.get_node, { ignore_injections = false })
   if not ok or not node then
     return false
@@ -56,8 +65,13 @@ function M.in_mathzone()
       return false
     end
 
-    -- If we hit a math container, verify cursor is within delimiters
-    if MATH_NODES[ntype] then
+    -- If we are inside an inner math node (e.g. formula), we are in math
+    if MATH_INNER[ntype] then
+      return true
+    end
+
+    -- If we hit a math container ($ ... $), verify cursor is within delimiters
+    if MATH_CONTAINERS[ntype] then
       return is_inside_math_bounds(node, crow, ccol)
     end
 
@@ -74,6 +88,11 @@ end
 
 --- Returns true if cursor is inside a comment
 function M.in_comment()
+  local ok_p, parser = pcall(vim.treesitter.get_parser)
+  if ok_p and parser then
+    pcall(parser.parse, parser)
+  end
+
   local ok, node = pcall(vim.treesitter.get_node, { ignore_injections = false })
   if not ok or not node then
     return false

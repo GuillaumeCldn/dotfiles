@@ -150,7 +150,7 @@ vim.api.nvim_create_autocmd('FileType', {
 	end,
 })
 
--- -- INFO: Treesitter doesn't yet support highlighting or indentation for typst (10.2026)
+-- INFO: Treesitter doesn't yet support highlighting or indentation for typst (10.2026)
 -- vim.api.nvim_create_autocmd('FileType', {
 -- 	group = augroup,
 -- 	pattern = 'typst',
@@ -191,6 +191,16 @@ require("catppuccin").setup({
 		transparent = true,
 		solid = false,
 	},
+	custom_highlights = function(colors)
+		return {
+			-- Don't highlight bold text red (use text color instead of maroon)
+			["@markup.strong"] = { fg = colors.text, bold = true },
+			["@text.strong"] = { fg = colors.text, bold = true },
+
+			-- Highlight characters marked letter by the parser differently from identifiers
+			["@typst.letter"] = { fg = colors.flamingo, italic = true },
+		}
+	end,
 })
 vim.cmd.colorscheme("catppuccin-macchiato")
 require("mini.pick").setup()

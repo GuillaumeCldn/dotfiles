@@ -1,0 +1,3 @@
+;; extends
+
+(letter) @typst.letter
