@@ -37,6 +37,7 @@ vim.opt.pumheight = 5
 vim.g.mapleader = " "
 vim.keymap.set("n", "<leader>so", ":update<CR> :source<CR>", { desc = "Source current file" })
 vim.keymap.set("n", "<leader>re", ":restart<CR>", { desc = "Restart Neovim" })
+vim.keymap.set("n", "<leader>rc", ":e $MYVIMRC<CR>", { desc = "Edit config" })
 vim.keymap.set("n", "<leader>lf", vim.lsp.buf.format, { desc = "Format code using LSP" })
 vim.keymap.set("n", "<leader>f", ":Pick files<CR>", { desc = "Open file picker" })
 vim.keymap.set("n", "<leader>h", ":Pick help<CR>", { desc = "Open help picker" })
@@ -78,8 +79,13 @@ vim.keymap.set("i", "<A-Right>", "<C-Right>", { desc = "Move to next word" })
 -- MacOs double-space for full stop.
 vim.keymap.set("i", "<space><space>", ". ", { desc = "MacOs style full stop" })
 
--- Quick config editing
-vim.keymap.set("n", "<leader>rc", ":e $MYVIMRC<CR>", { desc = "Edit config" })
+-- better movement in wrapped text
+vim.keymap.set("n", "j", function()
+	return vim.v.count == 0 and "gj" or "j"
+end, { expr = true, silent = true, desc = "Down (wrap-aware)" })
+vim.keymap.set("n", "k", function()
+	return vim.v.count == 0 and "gk" or "k"
+end, { expr = true, silent = true, desc = "Up (wrap-aware)" })
 
 -- Typst Preview
 vim.keymap.set("n", "<leader>TP", ":TypstPreview<CR>", { desc = "Open Typst preview" })
