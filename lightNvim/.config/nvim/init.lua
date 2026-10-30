@@ -110,6 +110,18 @@ vim.api.nvim_create_autocmd('LspAttach', {
 		if client:supports_method('textDocument/completion') then
 			vim.lsp.completion.enable(true, client.id, ev.buf)
 		end
+		-- Format-on-save for C/C++ files if a relevant style guide applies
+		if client.name == 'clangd' and client:supports_method('textDocument/formatting') then
+			vim.api.nvim_create_autocmd('BufWritePre', {
+				group = augroup,
+				buffer = ev.buf,
+				callback = function()
+					if vim.fs.root(ev.buf, { '.clang-format' }) then --Check for .clang-format in project root
+						vim.lsp.buf.format({ bufnr = ev.buf, id = client.id })
+					end
+				end,
+			})
+		end
 	end,
 })
 
