@@ -9,11 +9,15 @@ local MATH_NODES = {
 
 -- Nodes that break math context (e.g. text/strings or comments inside $ ... $)
 local NON_MATH_NODES = {
-  string = true,    -- Typst text in math: $ "text" $
-  comment = true,   -- Comments: /* ... */ or // ...
-  content = true,   -- Embedded content block: $ [markup] $
-  raw_span = true,  -- Inline raw code: `code`
-  raw_blck = true,
+  string = true,        -- Typst text in math: $ "text" $
+  comment = true,       -- Comments (uben0)
+  line_comment = true,  -- Line comment (SeniorMars)
+  block_comment = true, -- Block comment (SeniorMars)
+  content = true,       -- Embedded content block (uben0)
+  content_block = true, -- Embedded content block (SeniorMars)
+  raw_span = true,      -- Inline raw code (uben0)
+  raw_blck = true,      -- Raw block (uben0)
+  raw = true,           -- Raw code/block (SeniorMars)
 }
 
 --- Checks if (crow, ccol) is strictly inside the math delimiters
@@ -76,7 +80,8 @@ function M.in_comment()
   end
 
   while node do
-    if node:type() == "comment" then
+    local ntype = node:type()
+    if ntype == "comment" or ntype == "line_comment" or ntype == "block_comment" then
       return true
     end
     node = node:parent()

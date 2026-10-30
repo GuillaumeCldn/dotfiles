@@ -144,21 +144,21 @@ vim.api.nvim_create_autocmd('LspAttach', {
 
 vim.api.nvim_create_autocmd('FileType', {
 	group = augroup,
-	pattern = { 'c', 'cpp', 'python', 'sh', 'lua' }, --INFO: tex files don't work well with TS, i.e. vimtex
+	pattern = { 'c', 'cpp', 'python', 'sh', 'lua', 'typst' }, --INFO: tex files don't work well with TS, i.e. vimtex
 	callback = function()
 		vim.treesitter.start()
 	end,
 })
 
--- INFO: Treesitter doesn't yet support highlighting or indentation for typst (10.2026)
-vim.api.nvim_create_autocmd('FileType', {
-	group = augroup,
-	pattern = 'typst',
-	callback = function(args)
-		vim.treesitter.start(args.buf)
-		vim.bo[args.buf].syntax = 'typst' -- Re-enables your syntax highlighting!
-	end,
-})
+-- -- INFO: Treesitter doesn't yet support highlighting or indentation for typst (10.2026)
+-- vim.api.nvim_create_autocmd('FileType', {
+-- 	group = augroup,
+-- 	pattern = 'typst',
+-- 	callback = function(args)
+-- 		vim.treesitter.start(args.buf)
+-- 		vim.bo[args.buf].syntax = 'typst' -- Re-enables your syntax highlighting!
+-- 	end,
+-- })
 
 -- ============================================================================
 -- Packages 
