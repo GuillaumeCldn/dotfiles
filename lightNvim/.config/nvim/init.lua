@@ -193,12 +193,10 @@ require("catppuccin").setup({
 	},
 	custom_highlights = function(colors)
 		return {
-			-- Don't highlight bold text red (use text color instead of maroon)
 			["@markup.strong"] = { fg = colors.text, bold = true },
 			["@text.strong"] = { fg = colors.text, bold = true },
-
-			-- Highlight characters marked letter by the parser differently from identifiers
 			["@typst.letter"] = { fg = colors.flamingo, italic = true },
+			["@markup.math.delimiter"] = { fg = colors.mauve },
 		}
 	end,
 })
