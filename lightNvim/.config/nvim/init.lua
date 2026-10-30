@@ -168,6 +168,14 @@ vim.pack.add({
 
 -- Package activation
 require("vim._core.ui2").enable({})
+require("catppuccin").setup({
+	flavour = "macchiato",
+	transparent_background = true,
+	float = {
+		transparent = true,
+		solid = false,
+	},
+})
 require("mini.pick").setup()
 require("todo-comments").setup()
 require("lualine").setup({
@@ -267,9 +275,6 @@ vim.keymap.set('i', '<C-l>', '<c-g>u<Esc>[s1z=`]a<c-g>u', { desc = "Correct last
 
 -- Colourscheme & background
 vim.cmd.colorscheme("catppuccin-macchiato")
-vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
-vim.api.nvim_set_hl(0, "NormalNC", { bg = "none" })
-vim.api.nvim_set_hl(0, "EndOfBuffer", { bg = "none" })
 vim.api.nvim_set_hl(0, "WinSeparator", { fg = "Grey", bg = "none" })
 
 -- ============================================================================
