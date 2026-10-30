@@ -115,8 +115,10 @@ vim.api.nvim_create_autocmd('LspAttach', {
 
 vim.api.nvim_create_autocmd('FileType', {
 	group = augroup,
-	pattern = { 'c', 'cpp', 'python', 'sh', 'lua' },
-	callback = function() vim.treesitter.start() end,
+	pattern = { 'c', 'cpp', 'python', 'sh', 'lua' }, --INFO: tex files don't work well with TS, i.e. vimtex
+	callback = function()
+		vim.treesitter.start()
+	end,
 })
 
 -- INFO: Treesitter doesn't yet support highlighting or indentation for typst (10.2026)
@@ -133,8 +135,8 @@ vim.pack.add({
 	{ src = "https://github.com/lervag/vimtex" },
 	{ src = "https://github.com/catppuccin/nvim" },
 	{ src = "https://github.com/L3MON4D3/LuaSnip" },
-	{ src = "https://github.com/folke/snacks.nvim"},
-	{ src = "https://github.com/Aietes/esp32.nvim"},
+	{ src = "https://github.com/folke/snacks.nvim" },
+	{ src = "https://github.com/Aietes/esp32.nvim" },
 	{ src = "https://github.com/Freedzone/kerbovim" },
 	{ src = "https://github.com/nvim-mini/mini.pick" },
 	{ src = "https://github.com/nvim-mini/mini.icons" },
@@ -196,13 +198,13 @@ require("esp32").setup({
 
 -- ESP32 keybinds
 vim.keymap.set("n", "<leader>Rb", require("esp32").build, {
-  desc = "ESP32: Build",
+	desc = "ESP32: Build",
 })
 
 vim.keymap.set("n", "<leader>Rf", function()
-  require("esp32").pick("flash")
+	require("esp32").pick("flash")
 end, {
-  desc = "ESP32: Pick & Flash",
+	desc = "ESP32: Pick & Flash",
 })
 
 -- Language servers
@@ -221,24 +223,23 @@ vim.cmd [[
    " Vimscript to prevent snippet keymap from overwriting the default
 	imap <silent><expr> <Tab> luasnip#expandable() ? '<Plug>luasnip-expand-snippet' : '<Tab>'
 ]]
-vim.keymap.set({"i", "s"}, "<C-n>", function()
+vim.keymap.set({ "i", "s" }, "<A-j>", function()
 	if ls.jumpable(1) then
 		ls.jump(1)
 	end
-end, {silent = true})
-vim.keymap.set({"i", "s"}, "<C-p>", function()
+end, { silent = true })
+vim.keymap.set({ "i", "s" }, "<A-k>", function()
 	if ls.jumpable(-1) then
 		ls.jump(-1)
 	end
-end, {silent = true})
-vim.keymap.set({ "i", "s" }, "<C-E>", function()
+end, { silent = true })
+vim.keymap.set({ "i", "s" }, "<A-e>", function()
 	if ls.choice_active() then
 		ls.change_choice(1)
 	end
 end, { silent = true })
 vim.keymap.set('n', '<Leader>LS',
 	'<Cmd>lua require("luasnip.loaders.from_lua").load({paths = "~/.config/nvim/snippets/"})<CR>')
-
 
 -- Spellcheck configuration
 vim.g.spellfile_URL = "https://www.mirrorservice.org/sites/ftp.vim.org/pub/vim/runtime/spell/"
