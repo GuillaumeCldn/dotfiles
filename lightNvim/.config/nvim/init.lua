@@ -26,10 +26,7 @@ vim.opt.signcolumn = "yes"
 vim.opt.winblend = 0
 
 -- Completion settings
-vim.opt.autocomplete = true
-vim.opt.autocompletedelay = 250
-vim.opt.complete = "o"
-vim.opt.completeopt = "menuone,noselect,noinsert"
+vim.opt.completeopt = { "menu", "menuone", "noselect", "fuzzy" }
 vim.opt.pumblend = 5
 vim.opt.pumheight = 5
 
@@ -114,7 +111,16 @@ vim.api.nvim_create_autocmd('LspAttach', {
 	callback = function(ev)
 		local client = assert(vim.lsp.get_client_by_id(ev.data.client_id))
 		if client:supports_method('textDocument/completion') then
-			vim.lsp.completion.enable(true, client.id, ev.buf)
+			-- Optional: make autocompletion trigger on all word characters (ASCII 32-126)
+			-- so it appears while typing words, not just after '.' or '->'
+			local chars = {}
+			for i = 32, 126 do
+				table.insert(chars, string.char(i))
+			end
+			client.server_capabilities.completionProvider = client.server_capabilities.completionProvider or {}
+			client.server_capabilities.completionProvider.triggerCharacters = chars
+			-- Enable built-in LSP completion with auto-triggering enabled
+			vim.lsp.completion.enable(true, client.id, ev.buf, { autotrigger = true })
 		end
 		-- Format-on-save for C/C++ files if a relevant style guide applies
 		if client.name == 'clangd' and client:supports_method('textDocument/formatting') then
@@ -122,7 +128,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
 				group = augroup,
 				buffer = ev.buf,
 				callback = function()
-					if vim.fs.root(ev.buf, { '.clang-format' }) then --Check for .clang-format in project root
+					if vim.fs.root(ev.buf, { '.clang-format' }) then
 						vim.lsp.buf.format({ bufnr = ev.buf, id = client.id })
 					end
 				end,
