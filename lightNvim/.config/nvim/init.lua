@@ -7,6 +7,7 @@ vim.opt.swapfile = false
 vim.opt.wrap = true
 vim.opt.linebreak = true
 vim.opt.breakindent = true
+vim.opt.splitright = true
 
 -- Indentation
 vim.opt.tabstop = 4
@@ -150,18 +151,8 @@ vim.api.nvim_create_autocmd('FileType', {
 	end,
 })
 
--- INFO: Treesitter doesn't yet support highlighting or indentation for typst (10.2026)
--- vim.api.nvim_create_autocmd('FileType', {
--- 	group = augroup,
--- 	pattern = 'typst',
--- 	callback = function(args)
--- 		vim.treesitter.start(args.buf)
--- 		vim.bo[args.buf].syntax = 'typst' -- Re-enables your syntax highlighting!
--- 	end,
--- })
-
 -- ============================================================================
--- Packages 
+-- Packages
 -- ============================================================================
 
 -- Installation
@@ -279,19 +270,55 @@ vim.keymap.set({ "i", "s" }, "<A-j>", function()
 	if ls.jumpable(1) then
 		ls.jump(1)
 	end
-end, { silent = true })
+end, { silent = true, desc = "Jump forwards in a snippet" })
 vim.keymap.set({ "i", "s" }, "<A-k>", function()
 	if ls.jumpable(-1) then
 		ls.jump(-1)
 	end
-end, { silent = true })
+end, { silent = true, desc = "Jump backwards in a snippet" })
 vim.keymap.set({ "i", "s" }, "<A-e>", function()
 	if ls.choice_active() then
 		ls.change_choice(1)
 	end
-end, { silent = true })
+end, { silent = true, desc = "Cycle snippet choice forwards" })
 vim.keymap.set('n', '<Leader>LS',
-	'<Cmd>lua require("luasnip.loaders.from_lua").load({paths = "~/.config/nvim/snippets/"})<CR>')
+	'<Cmd>lua require("luasnip.loaders.from_lua").load({paths = "~/.config/nvim/snippets/"})<CR>', { desc = "Reload snippets"})
+
+local function open_snippet_file()
+	local ft = vim.bo.filetype
+	if ft == "" then
+		vim.notify("No filetype detected for current buffer", vim.log.levels.WARN)
+		return
+	end
+
+	local snippets_dir = vim.fn.stdpath("config") .. "/snippets"
+	local ft_dir = snippets_dir .. "/" .. ft
+	local target_file
+
+	-- 1. Check if a directory exists for this filetype (e.g., snippets/tex/)
+	if vim.fn.isdirectory(ft_dir) == 1 then
+		local files = vim.fn.glob(ft_dir .. "/*.lua", false, true)
+		if #files > 0 then
+			target_file = files[1]
+		else
+			target_file = ft_dir .. "/" .. ft .. ".lua"
+		end
+	-- 2. Check if a standalone file exists (e.g., snippets/lua.lua)
+	elseif vim.fn.filereadable(snippets_dir .. "/" .. ft .. ".lua") == 1 then
+		target_file = snippets_dir .. "/" .. ft .. ".lua"
+	-- 3. If neither exists, default to snippets/<filetype>.lua
+	else
+		target_file = snippets_dir .. "/" .. ft .. ".lua"
+	end
+
+	-- Open in a vertical split
+	vim.cmd("vsplit " .. vim.fn.fnameescape(target_file))
+
+	-- Change working directory for this window to the snippet directory
+	local target_dir = vim.fs.dirname(target_file)
+	vim.cmd("lcd " .. vim.fn.fnameescape(target_dir))
+end
+vim.keymap.set("n", "<leader>se", open_snippet_file, { desc = "Edit snippet file for current filetype" })
 
 -- Spellcheck configuration
 vim.g.spellfile_URL = "https://www.mirrorservice.org/sites/ftp.vim.org/pub/vim/runtime/spell/"
