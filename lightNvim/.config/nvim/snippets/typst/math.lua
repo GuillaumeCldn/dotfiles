@@ -203,6 +203,7 @@ return {
 	s(
 		{
 		trig = "dd",
+		wordTrig = false,
 		snippetType = "autosnippet",
 		condition = in_mathzone,
 		},
@@ -233,6 +234,7 @@ return {
 	s(
 		{
 		trig = "sq",
+		wordTrig = false,
 		snippetType = "autosnippet",
 		condition = in_mathzone,
 		},
@@ -247,6 +249,7 @@ return {
 	s(
 		{
 		trig = "rt",
+		wordTrig = false,
 		snippetType = "autosnippet",
 		condition = in_mathzone,
 		},
