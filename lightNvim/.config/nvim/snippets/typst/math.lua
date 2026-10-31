@@ -13,50 +13,6 @@ local d = ls.dynamic_node
 local sn = ls.snippet_node
 local fmta = require("luasnip.extras.fmt").fmta
 
-local function gen_matrix(_, snip)
-	local rows = tonumber(snip.captures[1])
-	local cols = tonumber(snip.captures[2])
-	local nodes = {}
-	local insert_index = 1
-
-	for row = 1, rows do
-		for col = 1, cols do
-
-			table.insert(nodes, i(insert_index))
-			insert_index = insert_index + 1
-
-			if col < cols then
-				table.insert(nodes, t(", "))
-			end
-		end
-
-		if row < rows then
-			table.insert(nodes, t({ ";", "	" }))
-		end
-	end
-
-	return sn(nil, nodes)
-end
-
-local function gen_vector(_, snip)
-	local rows = tonumber(snip.captures[1])
-	local nodes = {}
-	local insert_index = 1
-
-	for row = 1, rows do
-
-		table.insert(nodes, i(insert_index))
-		insert_index = insert_index + 1
-
-		if row < rows then
-			table.insert(nodes, t({ ",", "	" }))
-		end
-
-	end
-
-	return sn(nil, nodes)
-end
-
 return {
 	s(
 		{
@@ -238,6 +194,20 @@ return {
 		},
 		fmta([[
 			tilde(<>)<>
+		]],
+		{
+			i(1),
+			i(0)
+		})
+	),
+	s(
+		{
+		trig = "dd",
+		snippetType = "autosnippet",
+		condition = in_mathzone,
+		},
+		fmta([[
+			dot.double(<>)<>
 		]],
 		{
 			i(1),
