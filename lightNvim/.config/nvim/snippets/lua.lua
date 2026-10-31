@@ -6,9 +6,15 @@ local t = ls.text_node
 local i = ls.insert_node
 local c = ls.choice_node
 local fmta = require("luasnip.extras.fmt").fmta
+local line_begin = require("luasnip.extras.expand_conditions").line_begin
 
 return {
-	s({ trig = "tsnip", snippetType = "autosnippet" },
+	s(
+		{
+			trig = "snip",
+			snippetType = "autosnippet",
+			condition = line_begin
+		},
 		fmta([[
 			s(
 				{
@@ -26,6 +32,7 @@ return {
 					t("snippet"),
 				}),
 				c(3, {
+					t("line_begin"),
 					t("in_mathzone"),
 					t("in_text"),
 					t("in_equation"),
@@ -35,17 +42,18 @@ return {
 					t("in_itemize"),
 				}),
 				c(4, {
-					sn(nil, { t({"{", "		"}), i(1), t({"","	}"}) }),
-					sn(nil, { t({"fmta([[", "		"}), i(1), t({"","	]],", "	{", "		"}), i(2), t({"","	})"}) }),
-					sn(nil, { t({"fmt([[", "		"}), i(1), t({"","	]],", "	{", "		"}), i(2), t({"","	})"}) }),
+					sn(nil, { t({ "{", "		" }), i(1), t({ "", "	}" }) }),
+					sn(nil, { t({ "fmta([[", "		" }), i(1), t({ "", "	]],", "	{", "		" }), i(2), t({ "", "	})" }) }),
+					sn(nil, { t({ "fmt([[", "		" }), i(1), t({ "", "	]],", "	{", "		" }), i(2), t({ "", "	})" }) }),
 				})
 			}
 		)
 	),
 	s(
 		{
-		trig = "sn_init",
-		snippetType = "autosnippet",
+			trig = "sini",
+			snippetType = "autosnippet",
+			condition = line_begin,
 		},
 		fmta([[
 			require("luasnip-helper-funcs")
@@ -57,32 +65,8 @@ return {
 				<>
 			}
 		]],
-		{
-			i(0)
-		})
-	),
-	s({ trig = "nsnip", snippetType = "autosnippet" },
-		fmta([[
-			s(
-				{
-				trig = "<>",
-				snippetType = "<>",
-				},
-				<>
-			),
-			]],
 			{
-				i(1, "trigger"),
-				c(2, {
-					t("autosnippet"),
-					t("snippet"),
-				}),
-				c(3, {
-					sn(nil, { t({"{", "		"}), i(1), t({"","	}"}) }),
-					sn(nil, { t({"fmta([[", "		"}), i(1), t({"","	]],", "	{", "		"}), i(2), t({"","	})"}) }),
-					sn(nil, { t({"fmt([[", "		"}), i(1), t({"","	]],", "	{", "		"}), i(2), t({"","	})"}) }),
-				})
-			}
-		)
+				i(0)
+			})
 	),
 }
