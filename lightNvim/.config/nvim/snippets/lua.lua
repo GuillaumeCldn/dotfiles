@@ -8,7 +8,7 @@ local c = ls.choice_node
 local fmta = require("luasnip.extras.fmt").fmta
 
 return {
-	s({ trig = "lsnip", snippetType = "autosnippet" },
+	s({ trig = "tsnip", snippetType = "autosnippet" },
 		fmta([[
 			s(
 				{
@@ -61,7 +61,7 @@ return {
 			i(0)
 		})
 	),
-	s({ trig = "tsnip", snippetType = "autosnippet" },
+	s({ trig = "nsnip", snippetType = "autosnippet" },
 		fmta([[
 			s(
 				{
