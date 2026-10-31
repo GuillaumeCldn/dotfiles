@@ -205,6 +205,27 @@ require("gitsigns").setup()
 package.path = package.path .. ";" .. vim.fn.expand("~/.config/nvim/snippets/?.lua")
 local ls = require("luasnip")
 local types = require("luasnip.util.types")
+
+-- Prevent LuaSnip from intercepting keystrokes and autocommands in Replace mode (R, Rv),
+local feedkeys = require("luasnip.util.feedkeys")
+local orig_feedkeys_insert = feedkeys.feedkeys_insert
+feedkeys.feedkeys_insert = function(keys)
+	local mode = vim.api.nvim_get_mode().mode
+	if mode:sub(1, 1) == "R" or vim.v.insertmode == "r" then
+		return
+	end
+	return orig_feedkeys_insert(keys)
+end
+
+local orig_active_update = ls.active_update_dependents
+ls.active_update_dependents = function(...)
+	local mode = vim.api.nvim_get_mode().mode
+	if mode:sub(1, 1) == "R" or vim.v.insertmode == "r" then
+		return
+	end
+	return orig_active_update(...)
+end
+
 ls.config.set_config {
 	keep_roots = true,
 	link_roots = true,
@@ -263,8 +284,8 @@ vim.diagnostic.config({
 
 -- Luasnip keymaps
 vim.cmd [[
-   " Vimscript to prevent snippet keymap from overwriting the default
-	imap <silent><expr> <Tab> luasnip#expandable() ? '<Plug>luasnip-expand-snippet' : '<Tab>'
+   " Vimscript to prevent snippet keymap from overwriting the default (and disabled in Replace mode)
+	imap <silent><expr> <Tab> (mode() ==# 'i' && luasnip#expandable()) ? '<Plug>luasnip-expand-snippet' : '<Tab>'
 ]]
 vim.keymap.set({ "i", "s" }, "<A-j>", function()
 	if ls.jumpable(1) then
@@ -282,7 +303,8 @@ vim.keymap.set({ "i", "s" }, "<A-e>", function()
 	end
 end, { silent = true, desc = "Cycle snippet choice forwards" })
 vim.keymap.set('n', '<Leader>LS',
-	'<Cmd>lua require("luasnip.loaders.from_lua").load({paths = "~/.config/nvim/snippets/"})<CR>', { desc = "Reload snippets"})
+	'<Cmd>lua require("luasnip.loaders.from_lua").load({paths = "~/.config/nvim/snippets/"})<CR>',
+	{ desc = "Reload snippets" })
 
 local function open_snippet_file()
 	local ft = vim.bo.filetype
@@ -303,10 +325,10 @@ local function open_snippet_file()
 		else
 			target_file = ft_dir .. "/" .. ft .. ".lua"
 		end
-	-- 2. Check if a standalone file exists (e.g., snippets/lua.lua)
+		-- 2. Check if a standalone file exists (e.g., snippets/lua.lua)
 	elseif vim.fn.filereadable(snippets_dir .. "/" .. ft .. ".lua") == 1 then
 		target_file = snippets_dir .. "/" .. ft .. ".lua"
-	-- 3. If neither exists, default to snippets/<filetype>.lua
+		-- 3. If neither exists, default to snippets/<filetype>.lua
 	else
 		target_file = snippets_dir .. "/" .. ft .. ".lua"
 	end
