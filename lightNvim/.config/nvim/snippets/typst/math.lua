@@ -166,7 +166,7 @@ return {
 			dot(<>)<>
 		]],
 		{
-			i(1),
+			d(1, get_visual),
 			i(0)
 		})
 	),
@@ -181,7 +181,7 @@ return {
 			hat(<>)<>
 		]],
 		{
-			i(1),
+			d(1, get_visual),
 			i(0)
 		})
 	),
@@ -196,7 +196,7 @@ return {
 			tilde(<>)<>
 		]],
 		{
-			i(1),
+			d(1, get_visual),
 			i(0)
 		})
 	),
@@ -210,7 +210,23 @@ return {
 			dot.double(<>)<>
 		]],
 		{
-			i(1),
+			d(1, get_visual),
+			i(0)
+		})
+	),
+	s(
+		{
+		trig = "cs",
+		snippetType = "autosnippet",
+		condition = in_mathzone,
+		},
+		fmta([[
+		cases(
+			<>
+		)<>
+		]],
+		{
+			d(1, get_visual),
 			i(0)
 		})
 	),
