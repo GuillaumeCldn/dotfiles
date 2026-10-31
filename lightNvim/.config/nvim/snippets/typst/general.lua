@@ -169,11 +169,10 @@ return {
 			condition = in_text
 		},
 		fmta([[
-#set document(title: [<>], author: [<>])<>
+#set document(title: [<>])<>
 		]],
 			{
-				i(1),
-				i(2),
+				d(1, get_visual),
 				i(0)
 			})
 	),
@@ -186,5 +185,92 @@ return {
 		{
 			t("#pagebreak()")
 		}
+	),
+	s(
+		{
+		trig = "^^",
+		snippetType = "autosnippet",
+		wordTrig = false,
+		condition = in_text,
+		},
+		fmta([[
+		#super[<>]<>
+		]],
+		{
+			d(1, get_visual),
+			i(0)
+		})
+	),
+	s(
+		{
+		trig = "^/",
+		snippetType = "autosnippet",
+		wordTrig = false,
+		condition = in_text,
+		},
+		fmta([[
+		#sub[<>]<>
+		]],
+		{
+			d(1, get_visual),
+			i(0)
+		})
+	),
+	s(
+		{
+		trig = "§",
+		snippetType = "autosnippet",
+		wordTrig = false,
+		condition = in_text,
+		},
+		fmta([[
+		#footnote[<>]<>
+		]],
+		{
+			d(1, get_visual),
+			i(0)
+		})
+	),
+	s(
+		{
+		trig = "--",
+		snippetType = "autosnippet",
+		condition = in_text,
+		},
+		fmta([[
+		#underline[<>]<>
+		]],
+		{
+			d(1, get_visual),
+			i(0)
+		})
+	),
+	s(
+		{
+		trig = "-/",
+		snippetType = "autosnippet",
+		condition = in_text,
+		},
+		fmta([[
+		#strike[<>]<>
+		]],
+		{
+			d(1, get_visual),
+			i(0)
+		})
+	),
+	s(
+		{
+		trig = "££",
+		snippetType = "autosnippet",
+		condition = in_text,
+		},
+		fmta([[
+		`<>`<>
+		]],
+		{
+			d(1, get_visual),
+			i(0)
+		})
 	),
 }
