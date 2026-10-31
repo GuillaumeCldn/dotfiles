@@ -230,4 +230,32 @@ return {
 			i(0)
 		})
 	),
+	s(
+		{
+		trig = "sq",
+		snippetType = "autosnippet",
+		condition = in_mathzone,
+		},
+		fmta([[
+			sqrt(<>)<>
+		]],
+		{
+			d(1, get_visual),
+			i(0)
+		})
+	),
+	s(
+		{
+		trig = "rt",
+		snippetType = "autosnippet",
+		condition = in_mathzone,
+		},
+		fmta([[
+			root(3, <>)<>
+		]],
+		{
+			d(1, get_visual),
+			i(0)
+		})
+	),
 }
