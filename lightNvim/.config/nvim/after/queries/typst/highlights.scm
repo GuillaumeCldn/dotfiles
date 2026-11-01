@@ -5,3 +5,5 @@
 "$" @markup.math.delimiter
 
 (label) @label
+
+"_" @operator

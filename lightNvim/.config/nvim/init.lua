@@ -186,6 +186,8 @@ require("catppuccin").setup({
 		return {
 			["@markup.strong"] = { fg = colors.text, bold = true },
 			["@text.strong"] = { fg = colors.text, bold = true },
+			["@markup.italic"] = { fg = colors.text, italic = true },
+			["@text.emphasis"] = { fg = colors.text, italic = true },
 			["@typst.letter"] = { fg = colors.flamingo, italic = true },
 			["@markup.math.delimiter"] = { fg = colors.mauve },
 			["@markup.link.label"] = { fg = colors.teal },
